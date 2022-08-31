@@ -8,7 +8,11 @@ soma e retornar o valor. A Função main deve imprimir o resultado da soma.
 int main()
 {
     int soma(int a, int b);
-    int resultado = soma(10, 20);
+    int a, b;
+    
+    printf("Digite dois valores: \n");
+    scanf("%d%d", &a, &b);
+    int resultado = soma(a, b);
 
     printf("A soma entre esses numeros eh %d\n", resultado);
     return 1;
