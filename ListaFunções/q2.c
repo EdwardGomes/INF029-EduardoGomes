@@ -10,9 +10,9 @@ int main(){
     
     int subtrai(int a, int b, int c);
     int a, b, c, resultado;
-    a = 40;
-    b = 10;
-    c = 20;
+    
+    printf("Insira três valores: \n");
+    scanf("%d%d%d", &a, &b, &c);
     resultado = subtrai(a, b, c);
     
     printf("O resultado de %d - %d - %d eh: %d", a, b, c, resultado);
