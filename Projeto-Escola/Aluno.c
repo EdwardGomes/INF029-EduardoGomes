@@ -40,41 +40,43 @@ int mainAluno(Aluno listaAluno[], int qtdAluno) {
         }
         break;
       }
-      case 3:{
-            printf("Excluir Aluno\n");
-            printf("Digite a Matrícula: \n");
-            int matricula;
-            scanf("%d", &matricula);
-            int achou = 0;
-            if (matricula < 0){
-              printf("Matrícula Inválida");
-            break;
-          }else{
-            for (int i = 0; i < qtdAluno; i++)
-              {
-                if (matricula == listaAluno[i].matricula){
-                  
-                  listaAluno[i].ativo = -1;
-                  
-                for (int j = i; j < qtdAluno -1 ; j++){
-                  listaAluno[j].matricula = listaAluno[j+1].matricula;
-                  listaAluno[j].idade = listaAluno[j+1].idade;
-                  listaAluno[j].ativo = listaAluno[j+1].ativo;
-                  
-                }    
-                  qtdAluno --;
-                  achou = 1;
-                  break;
-                }
-              }
-              if (achou)
-                printf("Aluno Excluído com Sucesso!\n");
-              else 
-                printf("Matrícula Inexistente\n");
-              
-              }
-              break;
+      case 3: {
+  printf("Excluir Aluno\n");
+  printf("Digite a Matrícula: \n");
+  int matricula;
+  scanf("%d", &matricula);
+  int achou = 0;
+  if (matricula < 0) {
+    printf("Matrícula Inválida");
+    break;
+  } else {
+    for (int i = 0; i < qtdAluno; i++) {
+      if (matricula == listaAluno[i].matricula) {
+        listaAluno[i].ativo = -1;
+        for (int j = i; j < qtdAluno - 1; j++) {
+          listaAluno[j].matricula = listaAluno[j+1].matricula;
+          listaAluno[j].idade = listaAluno[j+1].idade;
+          listaAluno[j].ativo = listaAluno[j+1].ativo;
+          strcpy(listaAluno[j].nome, listaAluno[j+1].nome);
+          listaAluno[j].sexo = listaAluno[j+1].sexo;
+        }
+        listaAluno[qtdAluno-1].matricula = 0;
+        listaAluno[qtdAluno-1].idade = 0;
+        listaAluno[qtdAluno-1].ativo = 0;
+        strcpy(listaAluno[qtdAluno-1].nome, "");
+        listaAluno[qtdAluno-1].sexo = 'X';
+        qtdAluno--;
+        achou = 1;
+        break;
       }
+    }
+    if (achou)
+      printf("Aluno Excluído com Sucesso!\n");
+    else 
+      printf("Matrícula Inexistente\n");
+  }
+  break;
+}
           case 4:{
             printf("Atualizar Aluno\n");
             printf("Digite a Matrícula: \n");
