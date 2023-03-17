@@ -78,36 +78,46 @@ int mainProfessor(Professor listaProfessor[], int qtdProfessor) {
   }
   break;
 }
-          case 4:{
-            printf("Atualizar Professor\n");
-            printf("Digite a Matrícula: \n");
-            int matricula;
-            scanf("%d", &matricula);
-            int achou = 0;
-            if (matricula < 0){
-              printf("Matrícula Inválida");
-            break;
-          }else{
-            for (int i = 0; i < qtdProfessor; i++)
-              {
-                if (matricula == listaProfessor[i].matriculaP && listaProfessor[i].ativoP){
-                  printf("Digite a nova Matrícula: \n");
-                  int novaMatricula;
-                  scanf("%d", &novaMatricula);
-                  
-                  listaProfessor[i].matriculaP = novaMatricula;
-                  achou = 1;
-                  break;
-                }
-              }
-              if (achou)
-                printf("Professor Atualizado com Sucesso!\n");
-              else 
-                printf("Matrícula Inexistente\n");
-              
-              }
-              break;
-          }
+          case 4: {
+    printf("Atualizar Professor\n");
+    printf("Digite a Matrícula: \n");
+    int matricula;
+    scanf("%d", &matricula);
+    int achou = 0;
+    if (matricula < 0){
+        printf("Matrícula Inválida");
+        break;
+    } else {
+        for (int i = 0; i < qtdProfessor; i++) {
+            if (matricula == listaProfessor[i].matriculaP && listaProfessor[i].ativoP) {
+                printf("Digite a nova Matrícula: \n");
+                int novaMatricula;
+                scanf("%d", &novaMatricula);
+                printf("Digite o novo nome: \n");
+                char novoNome[50];
+                scanf(" %[^\n]s", novoNome);
+                printf("Digite a nova idade: \n");
+                int novaIdade;
+                scanf("%d", &novaIdade);
+                printf("Digite a nova disciplina: \n");
+                char novaDisciplina[50];
+                scanf(" %[^\n]s", novaDisciplina);
+
+                listaProfessor[i].matriculaP = novaMatricula;
+                listaProfessor[i].idadeP = novaIdade;
+                strcpy(listaProfessor[i].nomeP, novoNome);
+                strcpy(listaProfessor[i].disciplinaP, novaDisciplina);
+                achou = 1;
+                break;
+            }
+        }
+        if (achou)
+            printf("Professor Atualizado com Sucesso!\n");
+        else 
+            printf("Matrícula Inexistente\n");
+    }
+    break;
+}
     }  
   }
     return qtdProfessor;
