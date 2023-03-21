@@ -2,6 +2,7 @@
 #define TAM 3
 #include "professor.h"
 #include "Aluno.h"
+#include "disciplina.h"
 
 int imprimeMenu();
 
@@ -27,6 +28,11 @@ int main(void) {
   int qtdProfessor = 0;
   int opcaoProfessor = 1;
 
+  //int mainDisciplina(Disciplina listaDisciplina[], int qtdDisciplina);
+  Disciplina listaDisciplina[TAM];
+  int qtdDisciplina = 0;
+  int opcaoDisciplina = 1;
+
   while(opcao != 0){
     opcao = imprimeMenu();
 
@@ -40,7 +46,7 @@ int main(void) {
         break;
       }
       case 3:{
-        printf("Opcao de Disciplina\n");
+        //qtdDisciplina = mainDisciplina(listaDisciplina, qtdDisciplina);
         break;
       }
       default:{

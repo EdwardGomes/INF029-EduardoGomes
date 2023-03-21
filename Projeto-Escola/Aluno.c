@@ -3,113 +3,91 @@
 #include <time.h>
 #include "professor.h"
 #include <string.h>
-
+#include "disciplina.h"
 
 int cadastrarAluno(Aluno lista[], int qtd);
 void listarAlunos(Aluno lista[], int qtd);
+int atualizarAluno(Aluno lista[], int qtd);
+void atualizarAlunoInfo(Aluno* aluno);
 
-int menuAluno(){
-  int opcao;
-  int c;
-  printf("Opções de Aluno\n");
-  printf("0. Voltar\n");
-  printf("1. Cadastrar\n");
-  printf("2. Listar\n");
-  printf("3. Excluir\n");
-  printf("4. Atualizar\n");
-  scanf("%d", &opcao);
-  while ((c = getchar()) != '\n' && c != EOF); //limpa o buffer de entrada
-  return opcao;
-}
-
-int mainAluno(Aluno listaAluno[], int qtdAluno) { 
-  int opcao = 1;
-
-  while(opcao != 0){
-    opcao = menuAluno();
-    
-    switch(opcao){
-      case 1:{
-        qtdAluno = cadastrarAluno(listaAluno, qtdAluno);
-        break;
-      }
-      case 2:{
-        listarAlunos(listaAluno, qtdAluno);
-        if (qtdAluno == 0){
-          printf("Lista Alunos Vazia\n");
-        }
-        break;
-      }
-      case 3: {
-  printf("Excluir Aluno\n");
-  printf("Digite a Matrícula: \n");
-  int matricula;
-  scanf("%d", &matricula);
-  int achou = 0;
-  if (matricula < 0) {
-    printf("Matrícula Inválida");
-    break;
-  } else {
-    for (int i = 0; i < qtdAluno; i++) {
-      if (matricula == listaAluno[i].matricula) {
-        listaAluno[i].ativo = -1;
-        for (int j = i; j < qtdAluno - 1; j++) {
-          listaAluno[j].matricula = listaAluno[j+1].matricula;
-          listaAluno[j].idade = listaAluno[j+1].idade;
-          listaAluno[j].ativo = listaAluno[j+1].ativo;
-          strcpy(listaAluno[j].nome, listaAluno[j+1].nome);
-          listaAluno[j].sexo = listaAluno[j+1].sexo;
-        }
-        listaAluno[qtdAluno-1].matricula = 0;
-        listaAluno[qtdAluno-1].idade = 0;
-        listaAluno[qtdAluno-1].ativo = 0;
-        strcpy(listaAluno[qtdAluno-1].nome, "");
-        listaAluno[qtdAluno-1].sexo = 'X';
-        qtdAluno--;
-        achou = 1;
-        break;
-      }
+int menuAluno() {
+    int opcao;
+    int c;
+    printf("Opções de Aluno\n");
+    printf("0. Voltar\n");
+    printf("1. Cadastrar\n");
+    printf("2. Listar\n");
+    printf("3. Excluir\n");
+    printf("4. Atualizar\n");
+    scanf("%d", &opcao);
+    while ((c = getchar()) != '\n' && c != EOF) {
+        // limpa o buffer de entrada
     }
-    if (achou)
-      printf("Aluno Excluído com Sucesso!\n");
-    else 
-      printf("Matrícula Inexistente\n");
-  }
-  break;
+    return opcao;
 }
-          case 4:{
-            printf("Atualizar Aluno\n");
-            printf("Digite a Matrícula: \n");
-            int matricula;
-            scanf("%d", &matricula);
-            int achou = 0;
-            if (matricula < 0){
-              printf("Matrícula Inválida");
-            break;
-          }else{
-            for (int i = 0; i < qtdAluno; i++)
-              {
-                if (matricula == listaAluno[i].matricula && listaAluno[i].ativo){
-                  printf("Digite a nova Matrícula: \n");
-                  int novaMatricula;
-                  scanf("%d", &novaMatricula);
-                  
-                  listaAluno[i].matricula = novaMatricula;
-                  achou = 1;
-                  break;
+
+int mainAluno(Aluno listaAluno[], int qtdAluno) {
+    int opcao = 1;
+
+    while (opcao != 0) {
+        opcao = menuAluno();
+
+        switch (opcao) {
+            case 1: {
+                qtdAluno = cadastrarAluno(listaAluno, qtdAluno);
+                break;
+            }
+            case 2: {
+                listarAlunos(listaAluno, qtdAluno);
+                if (qtdAluno == 0) {
+                    printf("Lista Alunos Vazia\n");
                 }
-              }
-              if (achou)
-                printf("Aluno Atualizado com Sucesso!\n");
-              else 
-                printf("Matrícula Inexistente\n");
-              
-              }
+                break;
+            }
+            case 3: {
+                printf("Excluir Aluno\n");
+                printf("Digite a Matrícula: \n");
+                int matricula;
+                scanf("%d", &matricula);
+             int achou = 0;
+                if (matricula < 0) {
+            printf("Matrícula Inválida");
+            break;
+                } else {
+           for (int i = 0; i < qtdAluno; i++) {
+                if (matricula == listaAluno[i].matricula) {
+                   listaAluno[i].ativo = -1;
+                for (int j = i; j < qtdAluno - 1; j++) {
+           listaAluno[j].matricula = listaAluno[j + 1].matricula; listaAluno[j].idade = listaAluno[j + 1].idade;
+    listaAluno[j].ativo = listaAluno[j + 1].ativo;
+    strcpy(listaAluno[j].nome, listaAluno[j + 1].nome);
+       listaAluno[j].sexo = listaAluno[j + 1].sexo;
+                 }
+           listaAluno[qtdAluno - 1].matricula = 0;
+           listaAluno[qtdAluno - 1].idade = 0;
+           listaAluno[qtdAluno - 1].ativo = 0;
+            strcpy(listaAluno[qtdAluno - 1].nome, "");
+            listaAluno[qtdAluno - 1].sexo = 'X';
+            qtdAluno--;
+             achou = 1;
               break;
-          }
-    }  
+                        }
+                    }
+                    if (achou) {
+                        printf("Aluno Excluído com Sucesso!\n");
+                    } else {
+                        printf("Matrícula Inexistente\n");
+                    }
+                }
+                break;
+            }
+            case 4: {
+                qtdAluno = atualizarAluno(listaAluno, qtdAluno);
+                break;
+            }
+        }
+   
   }
-  return qtdAluno;
 }
   int cadastrarAluno(Aluno lista[], int qtd) {
     printf("#### Cadastrando aluno....\n");
@@ -126,6 +104,7 @@ int mainAluno(Aluno listaAluno[], int qtdAluno) {
             break;
         }
     }
+
     // Se a matricula já existe, gera uma nova
     while (encontrado) {
         matricula = rand() % 100000;
@@ -137,9 +116,10 @@ int mainAluno(Aluno listaAluno[], int qtdAluno) {
             }
         }
     }
-      char nome[50];
-      int input_valido = 0;
-      while (!input_valido) {
+
+    char nome[50];
+    int input_valido = 0;
+    while (!input_valido) {
         printf("Digite o nome do Aluno: ");
         if (fgets(nome, 50, stdin) != NULL) {
             if (nome[0] != '\n') { // Verifica se o usuário digitou algo
@@ -148,23 +128,24 @@ int mainAluno(Aluno listaAluno[], int qtdAluno) {
             }
         }
     }
-    strcpy(lista[qtd].nome, nome);
-    
-      int idade;
-      printf("Digite a idade: ");
-      scanf("%d", &lista[qtd].idade);
 
-      printf("Digite o sexo (M para masculino, F para feminino): ");
-      char sexo;
-      scanf(" %c", &sexo);
+    strcpy(lista[qtd].nome, nome);
+
+    int idade;
+    printf("Digite a idade: ");
+    scanf("%d", &lista[qtd].idade);
+
+    printf("Digite o sexo (M para masculino, F para feminino): ");
+    char sexo;
+    scanf(" %c", &sexo);
   
-    if(sexo == 'M') {
-    lista[qtd].sexo = 'M';
-    } else if(sexo == 'F') {
-    lista[qtd].sexo = 'F';
+    if (sexo == 'M') {
+        lista[qtd].sexo = 'M';
+    } else if (sexo == 'F') {
+        lista[qtd].sexo = 'F';
     } else {
-    printf("Sexo inválido! Usando sexo indefinido.\n");
-    lista[qtd].sexo = 'X';
+        printf("Sexo inválido! Usando sexo indefinido.\n");
+        lista[qtd].sexo = 'X';
     }
     
     // Adiciona o novo aluno a struct
@@ -175,13 +156,59 @@ int mainAluno(Aluno listaAluno[], int qtdAluno) {
     qtd++;
 
     return qtd;
-    
 }
 
-void listarAlunos(Aluno lista[5], int qtd){
-  printf("#### Lista de alunos....\n");
-  for (int i = 0; i < qtd; i++){
-    
-    printf("Nome: %s - Matrícula: %d - idade: %d sexo: %c\n", lista[i].nome, lista[i].matricula, lista[i].idade, lista[i].sexo);
-  }  
+void listarAlunos(Aluno lista[5], int qtd) {
+    printf("#### Lista de alunos....\n");
+    for (int i = 0; i < qtd; i++) {
+        printf("Nome: %s - Matrícula: %d - idade: %d sexo: %c\n", lista[i].nome, lista[i].matricula, lista[i].idade, lista[i].sexo);
+    }  
 }
+
+int atualizarAluno(Aluno listaAluno[], int qtdAluno) {
+    printf("Atualizar Aluno\n");
+    printf("Digite a Matrícula: \n");
+    int matricula;
+    scanf("%d", &matricula);
+    int achou = 0;
+
+    if (matricula < 0){
+        printf("Matrícula Inválida");
+        return qtdAluno;
+    } else {
+        for (int i = 0; i < qtdAluno; i++) {
+            if (matricula == listaAluno[i].matricula && listaAluno[i].ativo) {
+                // chama a função para pegar a atualização
+                atualizarAlunoInfo(&listaAluno[i]);
+                achou = 1;
+                break;
+            }
+        }
+        if (achou) {
+            printf("Aluno Atualizado com Sucesso!\n");
+        } else {
+            printf("Matrícula Inexistente\n");
+        }
+    }
+    return qtdAluno;
+}
+
+void atualizarAlunoInfo(Aluno *aluno) {
+    printf("Digite a nova Matrícula: \n");
+    int novaMatricula;
+    scanf("%d", &novaMatricula);
+    printf("Digite o novo nome: \n");
+    char novoNome[50];
+    scanf(" %[^\n]s", novoNome);
+    printf("Digite a nova idade: \n");
+    int novaIdade;
+    scanf("%d", &novaIdade);
+
+    aluno->matricula = novaMatricula;
+    aluno->idade = novaIdade;
+    strcpy(aluno->nome, novoNome);
+}
+
+
+
+
