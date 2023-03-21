@@ -7,6 +7,7 @@
 
 int cadastrarAluno(Aluno lista[], int qtd);
 void listarAlunos(Aluno lista[], int qtd);
+void excluirAluno(Aluno listaAluno[], int *qtdAluno);
 int atualizarAluno(Aluno lista[], int qtd);
 void atualizarAlunoInfo(Aluno* aluno);
 
@@ -40,45 +41,12 @@ int mainAluno(Aluno listaAluno[], int qtdAluno) {
             case 2: {
                 listarAlunos(listaAluno, qtdAluno);
                 if (qtdAluno == 0) {
-                    printf("Lista Alunos Vazia\n");
+                    printf("Lista de Alunos Vazia\n");
                 }
                 break;
             }
             case 3: {
-                printf("Excluir Aluno\n");
-                printf("Digite a Matrícula: \n");
-                int matricula;
-                scanf("%d", &matricula);
-             int achou = 0;
-                if (matricula < 0) {
-            printf("Matrícula Inválida");
-            break;
-                } else {
-           for (int i = 0; i < qtdAluno; i++) {
-                if (matricula == listaAluno[i].matricula) {
-                   listaAluno[i].ativo = -1;
-                for (int j = i; j < qtdAluno - 1; j++) {
-           listaAluno[j].matricula = listaAluno[j + 1].matricula; listaAluno[j].idade = listaAluno[j + 1].idade;
-    listaAluno[j].ativo = listaAluno[j + 1].ativo;
-    strcpy(listaAluno[j].nome, listaAluno[j + 1].nome);
-       listaAluno[j].sexo = listaAluno[j + 1].sexo;
-                 }
-           listaAluno[qtdAluno - 1].matricula = 0;
-           listaAluno[qtdAluno - 1].idade = 0;
-           listaAluno[qtdAluno - 1].ativo = 0;
-            strcpy(listaAluno[qtdAluno - 1].nome, "");
-            listaAluno[qtdAluno - 1].sexo = 'X';
-            qtdAluno--;
-             achou = 1;
-              break;
-                        }
-                    }
-                    if (achou) {
-                        printf("Aluno Excluído com Sucesso!\n");
-                    } else {
-                        printf("Matrícula Inexistente\n");
-                    }
-                }
+                excluirAluno(listaAluno, &qtdAluno);
                 break;
             }
             case 4: {
@@ -163,6 +131,43 @@ void listarAlunos(Aluno lista[5], int qtd) {
     for (int i = 0; i < qtd; i++) {
         printf("Nome: %s - Matrícula: %d - idade: %d sexo: %c\n", lista[i].nome, lista[i].matricula, lista[i].idade, lista[i].sexo);
     }  
+}
+
+void excluirAluno(Aluno listaAluno[], int *qtdAluno) {
+  printf("Excluir Aluno\n");
+  printf("Digite a Matrícula: \n");
+  int matricula;
+  scanf("%d", &matricula);
+  int achou = 0;
+  if (matricula < 0) {
+    printf("Matrícula Inválida");
+  } else {
+    for (int i = 0; i < *qtdAluno; i++) {
+      if (matricula == listaAluno[i].matricula) {
+        listaAluno[i].ativo = -1;
+        for (int j = i; j < *qtdAluno - 1; j++) {
+          listaAluno[j].matricula = listaAluno[j + 1].matricula;
+          listaAluno[j].idade = listaAluno[j + 1].idade;
+          listaAluno[j].ativo = listaAluno[j + 1].ativo;
+          strcpy(listaAluno[j].nome, listaAluno[j + 1].nome);
+          listaAluno[j].sexo = listaAluno[j + 1].sexo;
+        }
+        listaAluno[*qtdAluno - 1].matricula = 0;
+        listaAluno[*qtdAluno - 1].idade = 0;
+        listaAluno[*qtdAluno - 1].ativo = 0;
+        strcpy(listaAluno[*qtdAluno - 1].nome, "");
+        listaAluno[*qtdAluno - 1].sexo = 'X';
+        (*qtdAluno)--;
+        achou = 1;
+        break;
+      }
+    }
+    if (achou) {
+      printf("Aluno Excluído com Sucesso!\n");
+    } else {
+      printf("Matrícula Inexistente\n");
+    }
+  }
 }
 
 int atualizarAluno(Aluno listaAluno[], int qtdAluno) {
