@@ -1,130 +1,98 @@
-#include "Aluno.h"
 #include <stdio.h>
-#include <time.h>
-#include "professor.h"
 #include <string.h>
 #include "disciplina.h"
+#include "professor.h"
+#include "Aluno.h"
 
-int cadastrarDisciplina(Disciplina lista[], int qtd);
-void listarDisciplina(Disciplina lista[], int qtd);
+#define MAX_DISCIPLINAS 100
 
-int menuDisciplina(){
-  int opcao;
-  int c;
-  printf("Opções de Disciplina\n");
-  printf("0. Voltar\n");
-  printf("1. Cadastrar Disciplina\n");
-  printf("2. Vizualizar Disciplinas\n");
-  printf("3. Excluir\n");
-  printf("4. Atualizar\n");
-  scanf("%d", &opcao);
-  while ((c = getchar()) != '\n' && c != EOF); 
-  return opcao;
-}
+int cadastrarDisciplina(Disciplina lista[], int qtd, Professor listaProfessor[], int qtdProfessor);
+void listarDisciplinas(Disciplina lista[], int qtd);
 
-int mainDisciplina(Disciplina listaDisciplina[], int qtdDisciplina) { 
-  int opcao = 1;
-
-  while(opcao != 0){
-    opcao = menuDisciplina();
-    
-    switch(opcao){
-      case 1:{
-        qtdProfessor = cadastrarDisciplina(listaDisciplina, qtdDisciplina);
-        break;
-      }
-      case 2:{
-        listarDisciplina(listaDisciplinar, qtdDisciplina);
-        if (qtdDisciplina == 0){
-          printf("Lista de Disciplinas Vazia\n");
-        }
-        break;
-      }
-      case 3: {
-      printf("Excluir Disciplina\n");
-      printf("Digite a Disciplina: \n");
-      int matricula;
-      scanf("%d", &matricula);
-      int achou = 0;
-      if (matricula < 0) {
-        printf("Matrícula Inválida");
-        break;
-      } else {
-      for (int i = 0; i < qtdProfessor; i++) {
-        if (matricula == listaProfessor[i].matriculaP) {
-          listaProfessor[i].ativoP = -1;
-          for (int j = i; j < qtdProfessor - 1; j++) {
-            listaProfessor[j].matriculaP = listaProfessor[j+1].matriculaP;
-            listaProfessor[j].idadeP = listaProfessor[j+1].idadeP;
-            listaProfessor[j].ativoP = listaProfessor[j+1].ativoP;
-            strcpy(listaProfessor[j].nomeP, listaProfessor[j+1].nomeP);
-            strcpy(listaProfessor[j].disciplinaP, listaProfessor[j+1].disciplinaP);
-            listaProfessor[j].sexoP = listaProfessor[j+1].sexoP;
-          }
-        listaProfessor[qtdProfessor-1].matriculaP = 0;
-        listaProfessor[qtdProfessor-1].idadeP = 0;
-        listaProfessor[qtdProfessor-1].ativoP = 0;
-        strcpy(listaProfessor[qtdProfessor-1].nomeP, "");
-        strcpy(listaProfessor[qtdProfessor-1].disciplinaP, "");
-        listaProfessor[qtdProfessor-1].sexoP = 'X';
-        qtdProfessor--;
-        achou = 1;
-        break;
-      }
+int menuDisciplina() {
+    int opcao;
+    int c;
+    printf("Opções de Disciplina\n");
+    printf("0. Voltar\n");
+    printf("1. Cadastrar\n");
+    printf("2. Listar\n");
+    printf("3. Excluir\n");
+    printf("4. Atualizar\n");
+    scanf("%d", &opcao);
+    while ((c = getchar()) != '\n' && c != EOF) {
+        // limpa o buffer de entrada
     }
-    if (achou)
-      printf("Disciplina Excluído com Sucesso!\n");
-    else 
-      printf("Disciplina Inexistente\n");
-  }
-  break;
+    return opcao;
 }
-          case 4: {
-    printf("Atualizar Disciplina\n");
-    printf("Digite a Disciplina: \n");
-    int matricula;
-    scanf("%d", &matricula);
-    int achou = 0;
-    if (matricula < 0){
-        printf("Matrícula Inválida");
-        break;
-    } else {
-        for (int i = 0; i < qtdProfessor; i++) {
-            if (matricula == listaDisciplina[i].matriculaP && listaDisciplina[i].ativoP) {
-               
-                printf("Digite o novo nome: \n");
-                char novoNome[50];
-                scanf(" %[^\n]s", novoNome);
-                printf("Digite a nova idade: \n");
-                int novaIdade;
-                scanf("%d", &novaIdade);
-                printf("Digite a nova disciplina: \n");
-                char novaDisciplina[50];
-                scanf(" %[^\n]s", novaDisciplina);
 
-                strcpy(listaDisciplina[i].nomeP, novoNome);
-                strcpy(listaDisciplina[i].disciplinaP, novaDisciplina);
-                achou = 1;
+int mainDisciplina(Disciplina listaDisciplina[], int qtdDisciplina, Professor listaProfessor[], int qtdProfessor) {
+    int opcao = 1;
+
+    while (opcao != 0) {
+        opcao = menuDisciplina();
+
+        switch (opcao) {
+            case 1: {
+                qtdDisciplina = cadastrarDisciplina(listaDisciplina, qtdDisciplina, listaProfessor, qtdProfessor);
+                break;
+            }
+            case 2: {
+                listarDisciplinas(listaDisciplina, qtdDisciplina);
+                if (qtdDisciplina == 0) {
+                    printf("Lista de Disciplinas Vazia\n");
+                }
                 break;
             }
         }
-        if (achou)
-            printf("Disciplina Atualizado com Sucesso!\n");
-        else 
-            printf("Matrícula Inexistente\n");
     }
-    break;
+    return 0;
 }
-    }  
-  }
-    return qtdDisciplina;
-  }
 
-    int cadastrarDisciplina(Disciplina lista[], int qtd) {
-    printf("#### Cadastrando Disciplina....\n");
+int verificarProfessor(Professor lista[], int qtd, int matricula) {
+    for (int i = 0; i < qtd; i++) {
+        if (lista[i].matriculaP == matricula && lista[i].ativoP == 1) {
+            // Professor já cadastrado
+            return 1;
+        }
+    }
+    // Professor não encontrado
+    return 0;
+}
 
-    
-  }
+int cadastrarDisciplina(Disciplina lista[], int qtd, Professor listaProfessor[], int qtdProfessor) {
+    printf("#### Cadastrando disciplina....\n");
 
-    
-    
+    char nome[50];
+    int input_valido = 0;
+    while (!input_valido) {
+        printf("Digite o nome da disciplina: ");
+        if (fgets(nome, 50, stdin) != NULL) {
+            if (nome[0] != '\n') { // Verifica se o usuário digitou algo
+                nome[strcspn(nome, "\n")] = '\0';
+                input_valido = 1;
+            }
+        }
+    }
+
+    // Verifica se o professor já está cadastrado
+    int matriculaProfessor;
+    int professorEncontrado = 0;
+    while (!professorEncontrado) {
+        printf("Digite a matricula do professor responsável: ");
+        scanf("%d", &matriculaProfessor);
+        professorEncontrado = verificarProfessor(listaProfessor, qtdProfessor, matriculaProfessor);
+        if (!professorEncontrado) {
+            printf("Professor não encontrado. Tente novamente.\n");
+        }
+    }
+
+    // Adiciona a nova disciplina na lista
+    strcpy(lista[qtd].nome, nome);
+    lista[qtd].matriculaProfessor = matriculaProfessor;
+    lista[qtd].ativo = 1;
+    printf("Disciplina Cadastrada com Sucesso!\n");
+
+    qtd++;
+
+    return qtd;
+}

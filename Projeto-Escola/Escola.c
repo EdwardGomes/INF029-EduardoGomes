@@ -28,7 +28,7 @@ int main(void) {
   int qtdProfessor = 0;
   int opcaoProfessor = 1;
 
-  //int mainDisciplina(Disciplina listaDisciplina[], int qtdDisciplina);
+  int mainDisciplina(Disciplina listaDisciplina[], int qtdDisciplina);
   Disciplina listaDisciplina[TAM];
   int qtdDisciplina = 0;
   int opcaoDisciplina = 1;
@@ -46,7 +46,7 @@ int main(void) {
         break;
       }
       case 3:{
-        //qtdDisciplina = mainDisciplina(listaDisciplina, qtdDisciplina);
+        qtdDisciplina = mainDisciplina(listaDisciplina, qtdDisciplina);
         break;
       }
       default:{
