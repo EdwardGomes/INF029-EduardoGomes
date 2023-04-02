@@ -303,6 +303,7 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
-    int qtdOcorrencias;
+
+    int qtdOcorrencias = 0;
     return qtdOcorrencias;
 }
