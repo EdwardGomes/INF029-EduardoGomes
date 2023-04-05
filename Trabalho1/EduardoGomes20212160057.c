@@ -306,30 +306,25 @@ int q5(int num)
 int q6(int numerobase, int numerobusca)
 {
 
-    int qtdOcorrencias = 0;
+  int qtdOcorrencias = 0; 
+  int digito; 
+  int digito2; 
 
-    //Converte o numerobase e numerobusca em strings
-    char numBase[11];
-    sprintf(numBase, "%d", numerobase);
-    char numBuscaStr[11];
-    sprintf(numBuscaStr, "%d", numerobusca);
-
-    //Percorre a string numBase
-    for (int i = 0; i < strlen(numBase); i++) {
-        bool match = true;
-        //Percorre a string numBuscaStr
-      for (int j = 0; j < strlen(numBuscaStr); j++) {
-         // Verifica se os dígitos correspondentes são iguais  
-        if (numBase[i+j] != numBuscaStr[j]) {
-         // Se houver diferença, o match é falso e o loop interno é quebrado     
-            match = false;
-            break;
-            }
-        }
-        // Se todos os dígitos correspondentes forem iguais, incrementa a quantidade de ocorrências
-        if (match) {
-            qtdOcorrencias++;
-        }
+    
+    while (numerobase != 0){
+      digito = numerobase % 10; // obtém o último dígito do número base
+      if (digito == numerobusca){ // verifica se o dígito obtido é igual ao número buscado
+      qtdOcorrencias++; // se for igual, incrementa a quantidade de ocorrências
+      }
+      numerobase = numerobase / 10; // remove o último dígito do número base
+    }
+    
+    while (numerobusca != 0){
+      digito2 = numerobusca % 10; //obtém o último dígito do número buscado
+      if (digito2 == numerobase){ //verifica se o dígito obtido é igual ao último dígito do número base
+      qtdOcorrencias++; //se for igual, incrementa a quantidade de ocorrências
+      }
+      numerobusca = numerobusca / 10; // remove o último dígito do número buscado
     }
 
     return qtdOcorrencias;
