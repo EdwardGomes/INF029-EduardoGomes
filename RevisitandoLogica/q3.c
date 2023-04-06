@@ -4,7 +4,7 @@ Faça um programa que leia dois valores informados pelo usuário e inverta os va
 *******************************************************************************/
 #include <stdio.h>
 
-int main()
+int mainB()
 {
     int num1, num2, i;
     printf("Insira o primeiro número: \n");

@@ -17,7 +17,7 @@ int imprimeMenu(){
   return opcao;
 }
 
-int main(void) {
+int main1(void) {
   int mainAluno(Aluno listaAluno[], int qtdAluno);
   Aluno listaAluno[TAM];
   int qtdAluno = 0;

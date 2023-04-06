@@ -81,7 +81,7 @@ void testQ1(){
     printf("%d\n",q1(str) == 0);
     strcpy(str,"1/R/2016");
     printf("%d\n",q1(str) == 0);
-    strcpy(str,"1/12/19");
+    strcpy(str,"29/2/14");
     printf("%d\n",q1(str) == 1); 
 
 }

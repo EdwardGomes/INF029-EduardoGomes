@@ -306,26 +306,29 @@ int q5(int num)
 int q6(int numerobase, int numerobusca)
 {
 
-  int qtdOcorrencias = 0; 
-  int digito; 
-  int digito2; 
-
-    
+    int qtdOcorrencias = 0; 
+    int digito; 
+    int digito2; 
+  
     while (numerobase != 0){
-      digito = numerobase % 10; // obtém o último dígito do número base
+      digito = numerobase % 10; //obtém o último dígito do número base
       if (digito == numerobusca){ // verifica se o dígito obtido é igual ao número buscado
-      qtdOcorrencias++; // se for igual, incrementa a quantidade de ocorrências
-      }
-      numerobase = numerobase / 10; // remove o último dígito do número base
-    }
-    
-    while (numerobusca != 0){
-      digito2 = numerobusca % 10; //obtém o último dígito do número buscado
-      if (digito2 == numerobase){ //verifica se o dígito obtido é igual ao último dígito do número base
       qtdOcorrencias++; //se for igual, incrementa a quantidade de ocorrências
       }
-      numerobusca = numerobusca / 10; // remove o último dígito do número buscado
+      
+      numerobase = numerobase / 10; // remove o último dígito do número base
+     
     }
 
+    while (numerobusca != 0){
+      digito2 = numerobusca % 10; //obtém o último dígito do número buscado
+      if (digito2 == digito){ //verifica se o dígito obtido é igual ao último dígito do número base 
+      
+      }
+      
+      numerobusca = numerobusca / 10; //remove o último dígito do número buscado
+      
+    }
+ 
     return qtdOcorrencias;
 }

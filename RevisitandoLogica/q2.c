@@ -1,7 +1,7 @@
 //2.Faça um programa que leia a idade de duas pessoas e imprima a soma das idades
 #include <stdio.h>
 
-int main()
+int mainB()
 {
     int idade1, idade2, soma;
     

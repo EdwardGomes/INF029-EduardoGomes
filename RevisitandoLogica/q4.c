@@ -1,7 +1,7 @@
 /*Faça um programa que leia dois valores informados pelo usuário e inverta os valores nas variáveis lidas sem utilizar variável auxiliar*/
 #include <stdio.h>
 
-int main(){
+int mainC(){
   int a, b;
 
   printf("Digite o valor do primeiro número: ");

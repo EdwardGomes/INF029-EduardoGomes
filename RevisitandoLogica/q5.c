@@ -1,7 +1,7 @@
 //5.Faça um programa que leia a idade de uma pessoa e informe de ela é de maior ou menor
 #include <stdio.h>
 gg
-int main()
+int mainD()
 {
     int idade;
     

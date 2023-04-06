@@ -1,7 +1,7 @@
 /*Faça um programa que verifique se um número é primo*/
 #include <stdio.h>
 
-int main(){
+int mainF(){
   int n, div, primo;
   printf("Digite um número: ");
   scanf("%d", &n);

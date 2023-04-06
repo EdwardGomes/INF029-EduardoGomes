@@ -3,7 +3,7 @@
 *******************************************************************************/
 #include <stdio.h>
 
-int main()
+int mainQ()
 {
     int fatorial;
     int resposta=1;
