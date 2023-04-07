@@ -163,9 +163,10 @@ int q1(char data[])
   if ((ano % 4 == 0 && ano % 100 != 0) || ano % 400 == 0) { // verifica se o ano é bissexto
       diasMes[1] = 29; // adiciona um dia no mês de fevereiro
   }
-
-  if (dataQuebrada.iMes < 1 || dataQuebrada.iMes > 12) datavalida = 0;
-  else if (dataQuebrada.iDia < 1 || dataQuebrada.iDia > diasMes[dataQuebrada.iMes - 1]) datavalida = 0;
+  
+  if (dataQuebrada.iMes < 1 || dataQuebrada.iMes > 12) datavalida = 0; // verifica se o mês é válido
+  else if (dataQuebrada.iDia < 1 || dataQuebrada.iDia > diasMes[dataQuebrada.iMes - 1])  datavalida = 0; //Verifica se o valor do dia é válido para o mês fornecido, utilizando a matriz "diasMes" para verificar o número de dias em cada mês. 
+  //-1 é utilizado para acessar a posição correta da matriz, pois cada mês é representado por um número de 1 a 12, enquanto a matriz é indexada de 0 a 11.
      
   //printf("%s\n", data);
 
@@ -237,7 +238,7 @@ int q3(char *texto, char c, int isCaseSensitive)
     if (!isCaseSensitive) {
       
         letraTexto = tolower(letraTexto); //armazena o caractere atual em minúsculo
-        c = tolower(c);
+        c = tolower(c);//armazena o caractere de comparação em minúsculo
     }
       if (letraTexto == c){ //se o caractere atual for igual ao da comparação
         qtdOcorrencias++; //incrementa as ocorrências
@@ -264,6 +265,20 @@ int q3(char *texto, char c, int isCaseSensitive)
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
     int qtdOcorrencias = -1;
+    for (int i = 0; strTexto[i] != '\0' && i < 250; i++) {
+        int j = 0;
+        int k = i;
+        while (strTexto[k] == strBusca[j] && strTexto[k] != '\0' && strBusca[j] != '\0') {
+            k++;
+            j++;
+        }
+        if (strBusca[j] == '\0') {
+            qtdOcorrencias++;
+            posicoes[qtdOcorrencias * 2] = i + 1;
+            posicoes[qtdOcorrencias * 2 + 1] = k;
+        }
+      
+    }
 
     return qtdOcorrencias;
 }
@@ -305,30 +320,29 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
+    int qtdOcorrencias = 0;
+    char numBase[11];
+    sprintf(numBase, "%d", numerobase);
+    char numBuscaStr[11];
+    sprintf(numBuscaStr, "%d", numerobusca);
 
-    int qtdOcorrencias = 0; 
-    int digito; 
-    int digito2; 
-  
-    while (numerobase != 0){
-      digito = numerobase % 10; //obtém o último dígito do número base
-      if (digito == numerobusca){ // verifica se o dígito obtido é igual ao número buscado
-      qtdOcorrencias++; //se for igual, incrementa a quantidade de ocorrências
-      }
-      
-      numerobase = numerobase / 10; // remove o último dígito do número base
-     
+    for (int i = 0; i < strlen(numBase); i++) {
+        bool match = true;
+        //Percorre a string numBuscaStr
+      for (int j = 0; j < strlen(numBuscaStr); j++) {
+         //Verifica se os dígitos correspondentes são iguais  
+        if (numBase[i+j] != numBuscaStr[j]) {
+         //Se houver diferença, o match é falso e o loop interno é quebrado     
+            match = false;
+            break;
+            }
+        }
+        //Se todos os dígitos correspondentes forem iguais, incrementa a quantidade de ocorrências
+        if (match) {
+            qtdOcorrencias++;
+        }
     }
 
-    while (numerobusca != 0){
-      digito2 = numerobusca % 10; //obtém o último dígito do número buscado
-      if (digito2 == digito){ //verifica se o dígito obtido é igual ao último dígito do número base 
-      
-      }
-      
-      numerobusca = numerobusca / 10; //remove o último dígito do número buscado
-      
-    }
- 
     return qtdOcorrencias;
+
 }
