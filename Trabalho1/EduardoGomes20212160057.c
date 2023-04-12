@@ -265,22 +265,16 @@ int q3(char *texto, char c, int isCaseSensitive)
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
     int qtdOcorrencias = -1;
-    int i;
-    int j;
-    
-    for (i = 0; strTexto[i] != '\0' && i < 250; i++) {
-        if (strTexto[i] == strBusca[0]) {
-            for (j = 0; strBusca[j] != '\0' && j < 30; j++) {
-                if (strTexto[i + j] != strBusca[j]) {
-                    break;
-                }
-            }
-            if (strBusca[j] == '\0') {
-                qtdOcorrencias++;
-                posicoes[qtdOcorrencias * 2] = i + 1;
-                posicoes[qtdOcorrencias * 2 + 1] = i + j;
-            }
+    int contador = 0;
+
+    for (int i = 0; i < strlen(strTexto); i++) {
+      if (strBusca[0] == strTexto[i]){
+        contador = 1;
+        for (int j = 1; j < strlen(strBusca[i+j]); j++){
+          if (contador == strlen(busca))
+            contador++;
         }
+      }
     }
 
     return qtdOcorrencias;
@@ -301,11 +295,10 @@ int q5(int num)
     int temp;
     int numInvert = 0;
   
-    while (num != 0){
+    while (num != 0) {
       temp = num %10; //Armazena o último digito do numero original em Temp
       numInvert = numInvert * 10 + temp; // insere o dígito armazenado em 'temp' como o novo dígito mais significativo em 'numInvert'
       num = num / 10; //remove o último digito de Num
-      
     }
   
     return numInvert;
