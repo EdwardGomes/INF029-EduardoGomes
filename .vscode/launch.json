@@ -8,7 +8,34 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}INF029-EduardoGomes/Trabalho1/ex.exe",
+            "program": "${workspaceFolder}INF029-EduardoGomes/Trabalho1/",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${INF029-EduardoGomes}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/path/to/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+    
+         
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}INF029-EduardoGomes/Trabalho1/t1.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}INF029-EduardoGomes/Trabalho1",

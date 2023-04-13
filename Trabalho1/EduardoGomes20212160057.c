@@ -195,6 +195,7 @@ int q1(char data[])
 DiasMesesAnos q2(char datainicial[], char datafinal[])
 {
 
+    int diasMes[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     //calcule os dados e armazene nas três variáveis a seguir
     DiasMesesAnos dma;
 
@@ -204,8 +205,11 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
     }else if (q1(datafinal) == 0){
       dma.retorno = 3;
       return dma;
-    }else{
-      //verifique se a data final não é menor que a data inicial
+    }else{ //verifique se a data final não é menor que a data inicial
+      (q1(datafinal) > q1(datainicial)){
+      dma.retorno = 4;
+      return dma;
+    }
       
       //calcule a distancia entre as datas
 
@@ -264,19 +268,27 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
-    int qtdOcorrencias = -1;
-    int contador = 0;
-
-    for (int i = 0; i < strlen(strTexto); i++) {
-      if (strBusca[0] == strTexto[i]){
-        contador = 1;
-        for (int j = 1; j < strlen(strBusca[i+j]); j++){
-          if (contador == strlen(busca))
-            contador++;
+    int qtdOcorrencias = 0;
+    // Percorre o texto base
+    for (int i = 0; i <= strlen(strTexto); i++) {
+      if (strTexto[i] == strBusca[0]) {// Se o caractere atual for igual ao primeiro caractere da palavra buscada, começa a comparar a palavra
+        int contador = 0;
+        for (int j = 0; j <= strlen(strBusca); j++) {// Percorre cada caractere da palavra buscada, comparando-o com o caractere correspondente no texto
+          if (strTexto[i + j] == strBusca[j]) {
+                contador++;
+            }
         }
-      }
+      // Se o contador for igual ao tamanho da palavra buscada, significa que a palavra foi encontrada
+        if (contador == strlen(strBusca)) {
+            qtdOcorrencias++;
+       // Armazena a posição de início e fim da palavra no vetor de posições
+            posicoes[qtdOcorrencias * 2 - 2] = i + 1;// posição inicial
+            posicoes[qtdOcorrencias * 2 - 1] = i + strlen(strBusca);
+            // posição final
+            }
+        }
     }
-
+    
     return qtdOcorrencias;
 }
 
