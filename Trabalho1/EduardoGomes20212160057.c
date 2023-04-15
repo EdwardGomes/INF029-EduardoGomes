@@ -205,20 +205,19 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
     }else if (q1(datafinal) == 0){
       dma.retorno = 3;
       return dma;
-    }else{ //verifique se a data final não é menor que a data inicial
+    }else if//verifique se a data final não é menor que a data inicial
       (q1(datafinal) > q1(datainicial)){
       dma.retorno = 4;
       return dma;
     }
       
       //calcule a distancia entre as datas
-
+      
 
       //se tudo der certo
       dma.retorno = 1;
       return dma;
       
-    }
     
 }
 
@@ -269,11 +268,14 @@ int q3(char *texto, char c, int isCaseSensitive)
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
     int qtdOcorrencias = 0;
+    int i, j;
+    char strTexto2[250];
+    
     // Percorre o texto base
-    for (int i = 0; i <= strlen(strTexto); i++) {
+    for (i = 0; i <= strlen(strTexto); i++) {
       if (strTexto[i] == strBusca[0]) {// Se o caractere atual for igual ao primeiro caractere da palavra buscada, começa a comparar a palavra
         int contador = 0;
-        for (int j = 0; j <= strlen(strBusca); j++) {// Percorre cada caractere da palavra buscada, comparando-o com o caractere correspondente no texto
+        for (j = 0; j <= strlen(strBusca); j++) {// Percorre cada caractere da palavra buscada, comparando-o com o caractere correspondente no texto  
           if (strTexto[i + j] == strBusca[j]) {
                 contador++;
             }
@@ -286,6 +288,15 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
             posicoes[qtdOcorrencias * 2 - 1] = i + strlen(strBusca);
             // posição final
             }
+        int k = 0;
+        for (j = 0; j < i; j++)
+        {
+        if (strTexto[j] != -61)
+        {
+            strTexto2[k] = strTexto[j];
+            k++;
+        }
+      }
         }
     }
     
