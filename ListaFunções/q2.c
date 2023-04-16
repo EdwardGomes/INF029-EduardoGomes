@@ -6,7 +6,7 @@ e retornar o valor. A Função main deve imprimir o resultado da subtração.
 ************************************************************************/
 #include <stdio.h>
 
-int mainSoma(){
+int main(){
     
     int subtrai(int a, int b, int c);
     int a, b, c, resultado;

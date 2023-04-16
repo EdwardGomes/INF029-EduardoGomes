@@ -210,15 +210,31 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       dma.retorno = 4;
       return dma;
     }
-      
       //calcule a distancia entre as datas
-      
+    int anoInicial = 0;//pega o ano inicial
+    int anoFinal = 0;//pega o ano final
 
+    if ((anoInicial % 4 == 0 && anoInicial % 100 != 0) || anoInicial % 400 == 0)
+    {                  // verifica se o ano é bissexto
+      diasMes[1] = 29; // adiciona um dia no mês de fevereiro
+      }
+
+      for (int i = 0; i < 12; i++){
+        if (datainicial[i] == datafinal[i]){
+          dma.qtdDias = datafinal[i] - datainicial[i];
+          dma.qtdMeses = datafinal[i] - datainicial[i];
+          dma.qtdAnos = datafinal[i] - datainicial[i];
+        }
+        
+      }
       //se tudo der certo
-      dma.retorno = 1;
-      return dma;
-      
-    
+      if (dma.qtdDias >= 0 && dma.qtdMeses >= 0 && dma.qtdAnos >= 0){
+        dma.retorno = 1;
+        return dma;}
+      else{
+        dma.retorno = 4;
+        return dma;
+      }
 }
 
 /*
@@ -288,17 +304,10 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
             posicoes[qtdOcorrencias * 2 - 1] = i + strlen(strBusca);
             // posição final
             }
-        int k = 0;
-        for (j = 0; j < i; j++)
-        {
-        if (strTexto[j] != -61)
-        {
-            strTexto2[k] = strTexto[j];
-            k++;
+        
         }
-      }
         }
-    }
+    
     
     return qtdOcorrencias;
 }

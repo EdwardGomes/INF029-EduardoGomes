@@ -5,7 +5,7 @@ soma e retornar o valor. A Função main deve imprimir o resultado da soma.
 ************************************************************************/
 #include <stdio.h>
 
-int mainSoma()
+int main()
 {
     int soma(int a, int b);
     int a, b;
