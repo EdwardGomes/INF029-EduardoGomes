@@ -23,6 +23,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h>
 #include <string.h>
 #include "EduardoGomes20212160057.h" // Substitua pelo seu arquivo de header renomeado
 #include <stdlib.h>
@@ -177,7 +178,6 @@ int q1(char data[])
 }
 
 
-
 /*
  Q2 = diferença entre duas datas
  @objetivo
@@ -194,47 +194,53 @@ int q1(char data[])
  */
 DiasMesesAnos q2(char datainicial[], char datafinal[])
 {
-
-    int diasMes[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
     //calcule os dados e armazene nas três variáveis a seguir
     DiasMesesAnos dma;
 
     if (q1(datainicial) == 0){
       dma.retorno = 2;
       return dma;
-    }else if (q1(datafinal) == 0){
+    }
+    else if (q1(datafinal) == 0){
       dma.retorno = 3;
       return dma;
-    }else if//verifique se a data final não é menor que a data inicial
-      (q1(datafinal) > q1(datainicial)){
-      dma.retorno = 4;
-      return dma;
     }
+    
       //calcule a distancia entre as datas
-    int anoInicial = 0;//pega o ano inicial
-    int anoFinal = 0;//pega o ano final
+      DataQuebrada dataInicialQuebrada = quebraData(datainicial);//quebra a data inicial
+      DataQuebrada dataFinalQuebrada = quebraData(datafinal);//quebra a data final
 
-    if ((anoInicial % 4 == 0 && anoInicial % 100 != 0) || anoInicial % 400 == 0)
-    {                  // verifica se o ano é bissexto
-      diasMes[1] = 29; // adiciona um dia no mês de fevereiro
+      int anoInicial = dataInicialQuebrada.iAno;
+      int anoFinal = dataFinalQuebrada.iAno;
+      int mesInicial = dataInicialQuebrada.iMes;
+      int mesFinal = dataFinalQuebrada.iMes;
+      int diaInicial = dataInicialQuebrada.iDia;
+      int diaFinal = dataFinalQuebrada.iDia;
+
+      dma.qtdAnos = anoFinal - anoInicial;//calcula a diferença de anos
+      dma.qtdMeses = mesFinal - mesInicial;//calcula a diferença de meses
+      dma.qtdDias = diaFinal - diaInicial;//calcula a diferença de dias
+
+      if (dma.qtdDias < 0){//se a diferença de dias for negativa, soma 1 ao mês e subtrai 30 dias
+        dma.qtdDias += 30;
+        dma.qtdMeses -= 1;
       }
 
-      for (int i = 0; i < 12; i++){
-        if (datainicial[i] == datafinal[i]){
-          dma.qtdDias = datafinal[i] - datainicial[i];
-          dma.qtdMeses = datafinal[i] - datainicial[i];
-          dma.qtdAnos = datafinal[i] - datainicial[i];
-        }
-        
+      if (dma.qtdMeses < 0){//se a diferença de meses for negativa, soma 1 ao ano e subtrai 12 meses
+        dma.qtdMeses += 12;
+        dma.qtdAnos -= 1;
       }
-      //se tudo der certo
-      if (dma.qtdDias >= 0 && dma.qtdMeses >= 0 && dma.qtdAnos >= 0){
-        dma.retorno = 1;
-        return dma;}
-      else{
+
+      if (dma.qtdAnos < 0){//se a diferença de anos for negativa, retorna 4
         dma.retorno = 4;
         return dma;
       }
+
+      //se tudo der certo
+      if (dma.qtdAnos >= 0 && dma.qtdMeses >= 0 && dma.qtdDias >= 0){
+        dma.retorno = 1;
+        return dma;}    
 }
 
 /*
@@ -284,31 +290,31 @@ int q3(char *texto, char c, int isCaseSensitive)
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
     int qtdOcorrencias = 0;
+    char textoSemAcentos[250];
     int i, j;
-    char strTexto2[250];
     
     // Percorre o texto base
-    for (i = 0; i <= strlen(strTexto); i++) {
-      if (strTexto[i] == strBusca[0]) {// Se o caractere atual for igual ao primeiro caractere da palavra buscada, começa a comparar a palavra
+    for (i = 1; i < strlen(strTexto); i++) {
+      if (strTexto[i] == strBusca[0]) { // Se o caractere atual for igual ao primeiro caractere da palavra buscada, começa a comparar a palavra
+      
         int contador = 0;
-        for (j = 0; j <= strlen(strBusca); j++) {// Percorre cada caractere da palavra buscada, comparando-o com o caractere correspondente no texto  
+        for (j = 0; j < strlen(strBusca); j++) {// Percorre cada caractere da palavra buscada, comparando-o com o caractere correspondente no texto 
+        
           if (strTexto[i + j] == strBusca[j]) {
                 contador++;
             }
         }
       // Se o contador for igual ao tamanho da palavra buscada, significa que a palavra foi encontrada
+      
         if (contador == strlen(strBusca)) {
             qtdOcorrencias++;
        // Armazena a posição de início e fim da palavra no vetor de posições
             posicoes[qtdOcorrencias * 2 - 2] = i + 1;// posição inicial
-            posicoes[qtdOcorrencias * 2 - 1] = i + strlen(strBusca);
-            // posição final
+            posicoes[qtdOcorrencias * 2 - 1] = i + strlen(strBusca);// posição final
             }
-        
         }
-        }
-    
-    
+      }
+
     return qtdOcorrencias;
 }
 
@@ -354,23 +360,26 @@ int q6(int numerobase, int numerobusca)
     char numBuscaStr[11];
     sprintf(numBuscaStr, "%d", numerobusca);
 
-    for (int i = 0; i < strlen(numBase); i++) {
-        bool match = true;
-        //Percorre a string numBuscaStr
-      for (int j = 0; j < strlen(numBuscaStr); j++) {
-         //Verifica se os dígitos correspondentes são iguais  
-        if (numBase[i+j] != numBuscaStr[j]) {
-         //Se houver diferença, o match é falso e o loop interno é quebrado     
+    for (int i = 0; i < strlen(numBase); i++)
+    {
+      bool match = true;
+      // Percorre a string numBuscaStr
+      for (int j = 0; j < strlen(numBuscaStr); j++)
+      {
+            // Verifica se os dígitos correspondentes são iguais
+            if (numBase[i + j] != numBuscaStr[j])
+            {
+            // Se houver diferença, o match é falso e o loop interno é quebrado     
             match = false;
             break;
             }
-        }
+      }
         //Se todos os dígitos correspondentes forem iguais, incrementa a quantidade de ocorrências
         if (match) {
-            qtdOcorrencias++;
+          qtdOcorrencias++;
+        
+            }  
         }
-    }
-
+    
     return qtdOcorrencias;
-
 }

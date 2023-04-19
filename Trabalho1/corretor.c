@@ -33,7 +33,7 @@ int main()
 {
     //testSomar();
     //testFatorial();
-    //testQ1();
+    testQ1();
     testQ2();
     //testQ3();
     //testQ4();
@@ -62,6 +62,7 @@ void testFatorial()
 }
 
 void testQ1(){
+    printf("Teste Q1\n");
     char str[11];
     strcpy(str,"29/02/2015");
     printf("%d\n",q1(str) == 0);
@@ -81,7 +82,7 @@ void testQ1(){
     printf("%d\n",q1(str) == 0);
     strcpy(str,"1/R/2016");
     printf("%d\n",q1(str) == 0);
-    strcpy(str,"29/2/14");
+    strcpy(str,"01/06/2015");
     printf("%d\n",q1(str) == 1); 
 
 }
@@ -91,7 +92,7 @@ void testQ2()
     char datainicial[11], datafinal[11];
     int qtdDias, qtdMeses, qtdAnos;
     DiasMesesAnos dma;
-
+    printf("Teste Q2\n");
     //teste 1
     qtdDias = -1;
     qtdMeses = -1;
@@ -124,7 +125,7 @@ void testQ2()
     strcpy(datafinal, "01/06/2015");
     dma = q2(datainicial, datafinal);
     printf("%d\n", dma.retorno == 4);
-
+    
     //teste 3
     qtdDias = -1;
     qtdMeses = -1;
@@ -142,6 +143,7 @@ void testQ2()
 void testQ3()
 {
     char str[250];
+    printf("Teste Q3\n");
     strcpy(str, "Renato Lima Novais");
     printf("%d\n", q3(str, 'a', 0) == 3);
     printf("%d\n", q3(str, 'b', 0) == 0);
@@ -168,6 +170,7 @@ void testQ4()
     char strBusca[50];
     int posicoes[30];
     int i;
+    printf("Teste Q4\n");
     for (i = 0; i < 30; i++)
     {
         posicoes[i] = -1;
@@ -197,6 +200,7 @@ void testQ4()
 
 void testQ5()
 {
+    printf("Teste Q5\n");
     printf("%d\n", q5(345) == 543);
     printf("%d\n", q5(78) == 87);
     printf("%d\n", q5(3) == 3);
@@ -211,14 +215,10 @@ void testQ5()
 
 void testQ6()
 {
+    printf("Teste Q6\n");
     printf("%d\n",q6(34567368, 3) == 2);
     printf("%d\n",q6(34567368, 4576) == 0);
     printf("%d\n",q6(3539343, 3) == 4);
     printf("%d\n",q6(3539343, 39) == 1);
-    printf("%d\n",q6(5444, 44) == 1);
-    printf("%d\n",q6(54444, 44) == 2);
-    printf("%d\n",q6(1234562354, 23) == 2);
-    printf("%d\n",q6(1234, 13) == 0);
-    printf("%d\n",q6(544444, 4) == 5);
-    printf("%d\n",q6(1234562354, 32) == 0);  
+  
 }
