@@ -256,8 +256,7 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
 int q3(char *texto, char c, int isCaseSensitive)
 {
     int qtdOcorrencias = 0;
-    int tolower(int t);
-
+  
     for (int i = 0; texto[i] != '\0' && i < 250; i++) {
         char letraTexto = texto[i];
     if (!isCaseSensitive) {
