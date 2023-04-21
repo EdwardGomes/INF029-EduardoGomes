@@ -290,31 +290,27 @@ int q3(char *texto, char c, int isCaseSensitive)
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
     int qtdOcorrencias = 0;
-    char textoSemAcentos[250];
     int i, j;
-    
-    // Percorre o texto base
-    for (i = 1; i < strlen(strTexto); i++) {
-      if (strTexto[i] == strBusca[0]) { // Se o caractere atual for igual ao primeiro caractere da palavra buscada, começa a comparar a palavra
-      
-        int contador = 0;
-        for (j = 0; j < strlen(strBusca); j++) {// Percorre cada caractere da palavra buscada, comparando-o com o caractere correspondente no texto 
-        
-          if (strTexto[i + j] == strBusca[j]) {
-                contador++;
-            }
+
+    for (i = 0; strTexto[i] != '\0'; i++) {//percorre o texto base
+      int contador = 0;
+
+      for (j = 0; strBusca[j] != '\0'; j++) {//percorre a palavra de busca
+          
+      if (strTexto[i + j] == strBusca[j]) {//se o caractere atual for igual ao da palavra de busca
+        contador++;
         }
+
       // Se o contador for igual ao tamanho da palavra buscada, significa que a palavra foi encontrada
       
-        if (contador == strlen(strBusca)) {
-            qtdOcorrencias++;
+      if (contador == strlen(strBusca)) {
+          qtdOcorrencias++;
        // Armazena a posição de início e fim da palavra no vetor de posições
-            posicoes[qtdOcorrencias * 2 - 2] = i + 1;// posição inicial
-            posicoes[qtdOcorrencias * 2 - 1] = i + strlen(strBusca);// posição final
-            }
-        }
+          posicoes[qtdOcorrencias * 2 - 2] = i + 1;// posição inicial
+          posicoes[qtdOcorrencias * 2 - 1] = i + strlen(strBusca);// posição final
+          } 
       }
-
+    }
     return qtdOcorrencias;
 }
 
