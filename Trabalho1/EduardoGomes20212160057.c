@@ -206,7 +206,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       dma.retorno = 3;
       return dma;
     }
-    
       //calcule a distancia entre as datas
       DataQuebrada dataInicialQuebrada = quebraData(datainicial);//quebra a data inicial
       DataQuebrada dataFinalQuebrada = quebraData(datafinal);//quebra a data final
@@ -259,7 +258,7 @@ int q3(char *texto, char c, int isCaseSensitive)
   
     for (int i = 0; texto[i] != '\0' && i < 250; i++) {
         char letraTexto = texto[i];
-    if (!isCaseSensitive) {
+    if (!isCaseSensitive) {//se a pesquisa não for case sensitive, converte os caracteres para minúsculo
       
         letraTexto = tolower(letraTexto); //armazena o caractere atual em minúsculo
         c = tolower(c);//armazena o caractere de comparação em minúsculo
@@ -351,9 +350,9 @@ int q6(int numerobase, int numerobusca)
 {
     int qtdOcorrencias = 0;
     char numBase[11];
-    sprintf(numBase, "%d", numerobase);
+    sprintf(numBase, "%d", numerobase);//converte o número base para string
     char numBuscaStr[11];
-    sprintf(numBuscaStr, "%d", numerobusca);
+    sprintf(numBuscaStr, "%d", numerobusca);//converte o número de busca para string
 
     for (int i = 0; i < strlen(numBase); i++)
     {
