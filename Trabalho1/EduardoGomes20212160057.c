@@ -207,8 +207,8 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       return dma;
     }
       //calcule a distancia entre as datas
-      DataQuebrada dataInicialQuebrada = quebraData(datainicial);//quebra a data inicial
-      DataQuebrada dataFinalQuebrada = quebraData(datafinal);//quebra a data final
+      DataQuebrada dataInicialQuebrada = quebraData(datainicial);//*quebra a data inicial
+      DataQuebrada dataFinalQuebrada = quebraData(datafinal);//*quebra a data final
 
       int anoInicial = dataInicialQuebrada.iAno;
       int anoFinal = dataFinalQuebrada.iAno;
@@ -290,6 +290,8 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
   
     int qtdOcorrencias = 0;
     int i, j;
+
+    //*Não funciona para a segunda frase do teste
 
     for (i = 0; strTexto[i] != '\0'; i++) {//percorre o texto base
       int contador = 0;
