@@ -287,6 +287,7 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
+  
     int qtdOcorrencias = 0;
     int i, j;
 
