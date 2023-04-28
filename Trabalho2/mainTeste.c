@@ -48,6 +48,7 @@ void testeInserirSemNada()
 void testeCriarEstrutura()
 {
     show_log("testeCriarEstrutura()");
+    printf("Teste criar Estrutura\n");
     printf("%d\n", criarEstruturaAuxiliar(-2, 5) == POSICAO_INVALIDA);
     printf("%d\n", criarEstruturaAuxiliar(0, 5) == POSICAO_INVALIDA);
     printf("%d\n", criarEstruturaAuxiliar(11, 5) == POSICAO_INVALIDA);
