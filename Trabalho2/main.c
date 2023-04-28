@@ -100,7 +100,7 @@ int main()
             int valor;
             scanf("%i", &valor);
 
-            dobrar(&valor);
+            //dobrar(&valor);
 
             //passar para um funcao (void dobrar(...)) que recebe o numero e dobra (EstruturaVetores.c)
 

@@ -50,7 +50,6 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     
     int *estruturaAuxiliar = (int *)malloc(tamanho * sizeof(int));
     vetorPrincipal[posicao] = (int) estruturaAuxiliar;
-    free (estruturaAuxiliar);
 
     retorno = SUCESSO;
 
