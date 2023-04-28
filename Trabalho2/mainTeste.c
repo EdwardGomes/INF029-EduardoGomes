@@ -18,10 +18,10 @@ void testeListaEncadeada();
 int main()
 {
     inicializar();
-    //testeInserirSemNada();
-    testeCriarEstrutura();
-    /*testeInserirComEstrutura();
-    testeExcluir();
+    testeInserirSemNada();
+    //testeCriarEstrutura();
+    testeInserirComEstrutura();
+    /*testeExcluir();
     testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();
@@ -39,6 +39,7 @@ void show_log(char *str)
 void testeInserirSemNada()
 {
     show_log("testeInserirSemNada()");
+    printf("Teste inserir sem nada\n");
     printf("%d\n", inserirNumeroEmEstrutura(2, 2) == SEM_ESTRUTURA_AUXILIAR);
     printf("%d\n", inserirNumeroEmEstrutura(-2, 2) == POSICAO_INVALIDA);
     printf("%d\n", inserirNumeroEmEstrutura(0, 2) == POSICAO_INVALIDA);
@@ -64,6 +65,7 @@ void testeCriarEstrutura()
 void testeInserirComEstrutura()
 {
     show_log("testeInserirComEstrutura()");
+    printf("Teste inserir com estrutura\n");
     //###  int inserirNumeroEmEstrutura(int valor, int posicao); ###
     printf("%d\n", inserirNumeroEmEstrutura(2, 4) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(2, -2) == SUCESSO);
