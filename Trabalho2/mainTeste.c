@@ -20,9 +20,9 @@ int main()
     inicializar();
     testeInserirSemNada();
     testeCriarEstrutura();
-    //testeInserirComEstrutura();
-    /*testeExcluir();
-    testeExcluirNumeroEspecifico();
+    testeInserirComEstrutura();
+    //testeExcluir();
+    /*testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();
     testeMudarTamanhoEstrutura();
@@ -78,6 +78,7 @@ void testeInserirComEstrutura()
 void testeExcluir()
 {
     show_log("testeExcluir()");
+    printf("Teste excluir\n");
     //###  int excluirNumeroDoFinaldaEstrutura(int posicao); ###
     printf("%d\n", excluirNumeroDoFinaldaEstrutura(2) == SUCESSO);
     printf("%d\n", excluirNumeroDoFinaldaEstrutura(2) == SUCESSO);

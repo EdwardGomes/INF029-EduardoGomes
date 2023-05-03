@@ -49,8 +49,8 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     }
     // deu tudo certo, crie
     
-    int *estruturaAuxiliar[TAM] = (int *)malloc(tamanho * sizeof(int));
-    vetorPrincipal[posicao] = (int) estruturaAuxiliar;
+    int *estruturaAuxiliar = (int *)malloc(tamanho * sizeof(int));
+    vetorPrincipal[posicao] = (int) (intptr_t) estruturaAuxiliar;
 
     retorno = SUCESSO;
 
@@ -80,27 +80,31 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     else
     {
         // testar se existe a estrutura auxiliar
-        if (vetorPrincipal[posicao] != NULL)
+        if (vetorPrincipal[posicao] != 0)
         {
             existeEstruturaAuxiliar = 1;
-            return existeEstruturaAuxiliar;
-        }
-        {   // testar se a estrutura auxiliar tem espaço
+        
+            // testar se a estrutura auxiliar tem espaço
             if (vetorPrincipal[posicao] != TAM)
             {   
                 temEspaco = 1;
-                return temEspaco;
                 //insere
                 retorno = SUCESSO;
+                return retorno;
             }
             else
-            {
-                retorno = SEM_ESPACO;
+            {   if (vetorPrincipal[posicao] == TAM)// se a estrutura auxiliar estiver cheia
+                {
+                    retorno = SEM_ESPACO;
+                    return retorno;
+                }
             }
         }
         else
         {
             retorno = SEM_ESTRUTURA_AUXILIAR;
+            return retorno;
+        
         }
     }
 
@@ -119,6 +123,8 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
+    
+
     int retorno = SUCESSO;
     return retorno;
 }

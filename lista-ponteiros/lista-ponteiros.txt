@@ -1,0 +1,8 @@
+Lista de Exercícios / Ponteiros 
+
+1) Crie um programa que defina variáveis do tipo int, char, string [10 posições], float, double. Deve ser definido também uma variável ponteiro para cada um dos tipos acima. Faça leituras (scanf) e escrita (printf) das variáveis primitivas e depois faça o mesmo utilizando ponteiros.
+2) Faça um programa que tenha uma função troca que recebe dois parâmetros inteiros e troque o valor das variáveis um pelo outro. A função main deve ler do usuário os dois valores, chamar a função troca, e depois imprimir os valores trocados.
+3) Faça um programa que tenha uma função ordena que recebe um vetor de inteiros e ordene os valores. A função main deve ler do usuário os valores (ex. 5 valores), chamar a função ordena, e depois imprimir os valores ordenados.
+4) Faça um programa que monte uma pilha dinâmica com valores inteiros informados pelo usuário. Deve ter uma função insere, que recebe um ponteiro para o topo da pilha e insere o valor no topo.
+5) Faça um programa que monte uma lista encadeada dinâmica com valores inteiros informados pelo usuário. Deve ter uma função insere, que recebe um ponteiro para o primeiro elemento da lista e insere o valor na lista já ordenado.
+6) Faça um programa que monte uma lista duplamente encadeada dinâmica com valores inteiros informados pelo usuário. Deve ter uma função insere, que recebe um ponteiro para o primeiro elemento da lista e insere o valor na lista já ordenado.
