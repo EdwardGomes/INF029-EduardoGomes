@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #define TAM 10
 
 #include "EstruturaVetores.h"
@@ -48,7 +49,7 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     }
     // deu tudo certo, crie
     
-    int *estruturaAuxiliar[10] = (int *)malloc(tamanho * sizeof(int));
+    int *estruturaAuxiliar[TAM] = (int *)malloc(tamanho * sizeof(int));
     vetorPrincipal[posicao] = (int) estruturaAuxiliar;
 
     retorno = SUCESSO;
@@ -72,8 +73,10 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     int temEspaco = 0;
     int posicao_invalida = 0;
 
-    if (posicao_invalida)
+    if (posicao < 1 || posicao > 10){
         retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
     else
     {
         // testar se existe a estrutura auxiliar
