@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 int mainC(){
-  int a, b;
+  int a;
+  int b;
 
   printf("Digite o valor do primeiro número: ");
   scanf("%d", &a);
