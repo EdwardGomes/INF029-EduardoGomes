@@ -95,8 +95,8 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
             else
             {   if (vetorPrincipal[posicao] == TAM)// se a estrutura auxiliar estiver cheia
                 {
-                    retorno = SEM_ESPACO;
-                    return retorno;
+                retorno = SEM_ESPACO;
+                return retorno;
                 }
             }
         }
