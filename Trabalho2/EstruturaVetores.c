@@ -80,7 +80,6 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         retorno = POSICAO_INVALIDA;
         return retorno;
     }
-    
         // testar se existe a estrutura auxiliar
         if (vetorPrincipal[posicao] == NULL)
         {
