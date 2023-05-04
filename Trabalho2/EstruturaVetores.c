@@ -97,7 +97,7 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         //insere
         if (temEspaco < TAM){
             vetorPrincipal[posicao][temEspaco] = valor;// inserir o valor na posição
-            printf("Value inserted successfully in %d, %d \n", posicao, valor);
+            printf("Value inserted successfully in %d, %d\n", posicao, valor);
             retorno = SUCESSO;
             return retorno;
         }
@@ -125,14 +125,14 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
 
     if (posicao < 1 || posicao > 10){
-        //printf("invalid position for structure\n");
+        printf("invalid position for structure\n");
         return POSICAO_INVALIDA;
     }
     
         // testa se existe a estrutura auxiliar
     if (vetorPrincipal[posicao] == NULL)
         {
-            //printf("No auxiliary structure\n");
+            printf("No auxiliary structure\n");
             return SEM_ESTRUTURA_AUXILIAR;
         }
 
@@ -140,6 +140,7 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
         for (int i = 0; i < TAM; i++){
             if (vetorPrincipal[posicao][i] == 0){
                 vetorPrincipal[posicao][i-1] = 0;
+                printf("Value deleted in %d\n", posicao);
                 return SUCESSO;
                 break;
             }
@@ -147,7 +148,7 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
 
         // se a estrutura estiver vazia
         if (vetorPrincipal[posicao][0] == 0){
-            //printf("empty structure\n");
+            printf("empty structure\n");
             return ESTRUTURA_AUXILIAR_VAZIA;
         }
 

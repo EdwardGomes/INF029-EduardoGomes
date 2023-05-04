@@ -49,7 +49,7 @@ void testeInserirSemNada()
 void testeCriarEstrutura()
 {
     show_log("testeCriarEstrutura()");
-    printf("Teste criar Estrutura\n");
+    printf("TESTE CRIAR ESTRUTURA\n");
     printf("%d\n", criarEstruturaAuxiliar(-2, 5) == POSICAO_INVALIDA);
     printf("%d\n", criarEstruturaAuxiliar(0, 5) == POSICAO_INVALIDA);
     printf("%d\n", criarEstruturaAuxiliar(11, 5) == POSICAO_INVALIDA);
@@ -65,7 +65,7 @@ void testeCriarEstrutura()
 void testeInserirComEstrutura()
 {
     show_log("testeInserirComEstrutura()");
-    printf("Teste inserir com estrutura\n");
+    printf("\nTESTE INSERIR COM ESTRUTURA\n\n");
     //###  int inserirNumeroEmEstrutura(int valor, int posicao); ###
     printf("%d\n", inserirNumeroEmEstrutura(2, 4) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(2, -2) == SUCESSO);
@@ -78,7 +78,7 @@ void testeInserirComEstrutura()
 void testeExcluir()
 {
     show_log("testeExcluir()");
-    printf("Teste excluir\n");
+    printf("\nTESTE EXCLUIR \n\n");
     //###  int excluirNumeroDoFinaldaEstrutura(int posicao); ###
     printf("%d\n", excluirNumeroDoFinaldaEstrutura(2) == SUCESSO);
     printf("%d\n", excluirNumeroDoFinaldaEstrutura(2) == SUCESSO);
