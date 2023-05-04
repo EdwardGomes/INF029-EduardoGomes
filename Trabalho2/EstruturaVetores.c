@@ -80,15 +80,14 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         retorno = POSICAO_INVALIDA;
         return retorno;
     }
-    else
-    {
+    
         // testar se existe a estrutura auxiliar
         if (vetorPrincipal[posicao] == NULL)
         {
             retorno = SEM_ESTRUTURA_AUXILIAR;
             return retorno;
         }
-            // testar se a estrutura auxiliar tem espaço
+        // testar se a estrutura auxiliar tem espaço
         for (int i = 0; i < TAM; i++){
             if (vetorPrincipal[posicao][i] == 0){
                 temEspaco = i;
@@ -97,18 +96,17 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         }
         //insere
         if (temEspaco < TAM){
-            vetorPrincipal[posicao][temEspaco] = valor;
+            vetorPrincipal[posicao][temEspaco] = valor;// inserir o valor na posição
             printf("Value inserted successfully in %d, %d \n", posicao, valor);
             retorno = SUCESSO;
             return retorno;
         }
         else
-        {
+        {  
             printf("No space\n");
             retorno = SEM_ESPACO;
             return retorno;
        }
-    }
 
     return retorno;
 }
@@ -125,9 +123,23 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
-    
 
-    int retorno = SUCESSO;
+    if (posicao < 1 || posicao > 10){
+        //printf("invalid position for structure\n");
+        return POSICAO_INVALIDA;
+    }
+    else
+    {
+        // testa se existe a estrutura auxiliar
+        if (vetorPrincipal[posicao] == NULL)
+        {
+            //printf("No auxiliary structure\n");
+            return SEM_ESTRUTURA_AUXILIAR;
+        }
+        
+    }
+
+    int retorno = SUCESSO;   
     return retorno;
 }
 
