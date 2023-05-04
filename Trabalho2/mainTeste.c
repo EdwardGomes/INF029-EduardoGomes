@@ -20,8 +20,8 @@ int main()
     inicializar();
     testeInserirSemNada();
     testeCriarEstrutura();
-    testeInserirComEstrutura();
-    //testeExcluir();
+    //testeInserirComEstrutura();
+    testeExcluir();
     /*testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();

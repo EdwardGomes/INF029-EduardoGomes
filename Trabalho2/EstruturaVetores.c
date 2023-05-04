@@ -128,19 +128,31 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
         //printf("invalid position for structure\n");
         return POSICAO_INVALIDA;
     }
-    else
-    {
+    
         // testa se existe a estrutura auxiliar
-        if (vetorPrincipal[posicao] == NULL)
+    if (vetorPrincipal[posicao] == NULL)
         {
             //printf("No auxiliary structure\n");
             return SEM_ESTRUTURA_AUXILIAR;
         }
-        
-    }
 
-    int retorno = SUCESSO;   
-    return retorno;
+        // se a estrutura nao estiver vazia
+        for (int i = 0; i < TAM; i++){
+            if (vetorPrincipal[posicao][i] == 0){
+                vetorPrincipal[posicao][i-1] = 0;
+                return SUCESSO;
+                break;
+            }
+        }
+
+        // se a estrutura estiver vazia
+        if (vetorPrincipal[posicao][0] == 0){
+            //printf("empty structure\n");
+            return ESTRUTURA_AUXILIAR_VAZIA;
+        }
+
+        int retorno = SUCESSO;
+        return retorno;
 }
 
 /*
