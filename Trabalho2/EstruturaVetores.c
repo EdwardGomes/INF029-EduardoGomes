@@ -104,7 +104,6 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         {
             retorno = SEM_ESTRUTURA_AUXILIAR;
             return retorno;
-        
         }
     }
 

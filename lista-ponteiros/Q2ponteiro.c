@@ -1,0 +1,1 @@
+/*2) Faça um programa que tenha uma função troca que recebe dois parâmetros inteiros e troque o valor das variáveis um pelo outro. A função main deve ler do usuário os dois valores, chamar a função troca, e depois imprimir os valores trocados.*/

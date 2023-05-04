@@ -1,0 +1,1 @@
+/*3) Faça um programa que tenha uma função ordena que recebe um vetor de inteiros e ordene os valores. A função main deve ler do usuário os valores (ex. 5 valores), chamar a função ordena, e depois imprimir os valores ordenados.*/
