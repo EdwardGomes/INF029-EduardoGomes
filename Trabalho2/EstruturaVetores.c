@@ -5,7 +5,7 @@
 
 #include "EstruturaVetores.h"
 
-int vetorPrincipal[TAM];
+int *vetorPrincipal[TAM];
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -24,12 +24,14 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     
     // se posição é um valor válido {entre 1 e 10}
     if (posicao < 1 || posicao > 10){
+      //  printf("invalid position for structure\n");
         retorno = POSICAO_INVALIDA;
 
         return retorno;
     }
     // a posicao pode já existir estrutura auxiliar
     if (vetorPrincipal[posicao]){
+       // printf("already has auxiliary structure\n");
     retorno = JA_TEM_ESTRUTURA_AUXILIAR;
 
     return retorno;
@@ -37,20 +39,21 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     
     // o tamanho nao pode ser menor que 1
     if (tamanho < 1){
+      // printf("invalid size\n");
     retorno = TAMANHO_INVALIDO;
 
     return retorno;
     }
     // o tamanho ser muito grande
     if (tamanho >= 10){
+       // printf("invalid size\n");
     retorno = SEM_ESPACO_DE_MEMORIA;
 
     return retorno;
     }
     // deu tudo certo, crie
-    
-    int *estruturaAuxiliar = (int *)malloc(tamanho * sizeof(int));
-    vetorPrincipal[posicao] = (int) (intptr_t) estruturaAuxiliar;
+    //printf ("creating auxiliary structure\n");
+    vetorPrincipal[posicao] = (int *)malloc(tamanho * sizeof(int));
 
     retorno = SUCESSO;
 
@@ -80,31 +83,31 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     else
     {
         // testar se existe a estrutura auxiliar
-        if (vetorPrincipal[posicao] != 0)
-        {
-            existeEstruturaAuxiliar = 1;
-        
-            // testar se a estrutura auxiliar tem espaço
-            if (vetorPrincipal[posicao] != TAM)
-            {   
-                temEspaco = 1;
-                //insere
-                retorno = SUCESSO;
-                return retorno;
-            }
-            else
-            {   if (vetorPrincipal[posicao] == TAM)// se a estrutura auxiliar estiver cheia
-                {
-                retorno = SEM_ESPACO;
-                return retorno;
-                }
-            }
-        }
-        else
+        if (vetorPrincipal[posicao] == NULL)
         {
             retorno = SEM_ESTRUTURA_AUXILIAR;
             return retorno;
         }
+            // testar se a estrutura auxiliar tem espaço
+        for (int i = 0; i < TAM; i++){
+            if (vetorPrincipal[posicao][i] == 0){
+                temEspaco = i;
+                break;
+            }
+        }
+        //insere
+        if (temEspaco < TAM){
+            vetorPrincipal[posicao][temEspaco] = valor;
+            printf("Value inserted successfully in %d, %d \n", posicao, valor);
+            retorno = SUCESSO;
+            return retorno;
+        }
+        else
+        {
+            printf("No space\n");
+            retorno = SEM_ESPACO;
+            return retorno;
+       }
     }
 
     return retorno;
