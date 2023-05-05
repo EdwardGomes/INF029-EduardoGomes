@@ -19,45 +19,40 @@ Rertono (int)
 */
 int criarEstruturaAuxiliar(int posicao, int tamanho)
 {
-
     int retorno = 0;
     
     // se posição é um valor válido {entre 1 e 10}
-    if (posicao < 1 || posicao > 10){
+    if (posicao < 1 || posicao > TAM){
       //  printf("invalid position for structure\n");
-        retorno = POSICAO_INVALIDA;
-
-        return retorno;
+        return POSICAO_INVALIDA;
+      
     }
     // a posicao pode já existir estrutura auxiliar
-    if (vetorPrincipal[posicao]){
+    if (vetorPrincipal[posicao-1] != NULL){
        // printf("already has auxiliary structure\n");
-    retorno = JA_TEM_ESTRUTURA_AUXILIAR;
+    return JA_TEM_ESTRUTURA_AUXILIAR;
 
-    return retorno;
     }
     
     // o tamanho nao pode ser menor que 1
     if (tamanho < 1){
       // printf("invalid size\n");
-    retorno = TAMANHO_INVALIDO;
+    return TAMANHO_INVALIDO;
 
-    return retorno;
     }
-    // o tamanho ser muito grande
-    if (tamanho >= 10){
-       // printf("invalid size\n");
-    retorno = SEM_ESPACO_DE_MEMORIA;
 
-    return retorno;
+   vetorPrincipal[posicao-1] = (int *)malloc(tamanho * sizeof(int));
+  
+    // o tamanho ser muito grande
+    if (!vetorPrincipal[posicao-1]){
+       // printf("invalid size\n");
+    return SEM_ESPACO_DE_MEMORIA;
+
     }
     // deu tudo certo, crie
     //printf ("creating auxiliary structure\n");
-    vetorPrincipal[posicao] = (int *)malloc(tamanho * sizeof(int));
-
-    retorno = SUCESSO;
-
-    return retorno;
+      
+    return SUCESSO;
 }
 
 /*
@@ -81,21 +76,22 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         return retorno;
     }
         // testar se existe a estrutura auxiliar
-        if (vetorPrincipal[posicao] == NULL)
+        if (vetorPrincipal[posicao-1] == NULL)
         {
             retorno = SEM_ESTRUTURA_AUXILIAR;
             return retorno;
         }
+        
         // testar se a estrutura auxiliar tem espaço
         for (int i = 0; i <= TAM; i++){
-            if (vetorPrincipal[posicao][i] == 0){
+            if (vetorPrincipal[posicao-1][i] == 0){
                 temEspaco = i;
                 break;
             }
         }
         //insere
-        if (temEspaco <= 2){
-            vetorPrincipal[posicao][temEspaco] = valor;// inserir o valor na posição
+        if (temEspaco <= posicao){
+            vetorPrincipal[posicao-1][temEspaco] = valor;// inserir o valor na posição
             printf("Value inserted successfully in %d, %d\n", posicao, valor);
             retorno = SUCESSO;
             return retorno;
@@ -106,7 +102,7 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
             retorno = SEM_ESPACO;
             return retorno;
        }
-
+      
     return retorno;
 }
 
@@ -122,35 +118,35 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
-
     if (posicao < 1 || posicao > 10){
         printf("invalid position for structure\n");
         return POSICAO_INVALIDA;
     }
     
         // testa se existe a estrutura auxiliar
-    if (vetorPrincipal[posicao] == NULL)
+    if (vetorPrincipal[posicao-1] == NULL)
         {
             printf("No auxiliary structure\n");
             return SEM_ESTRUTURA_AUXILIAR;
         }
 
         // se a estrutura nao estiver vazia
-        for (int i = 0; i <= TAM; i++){
-            if (vetorPrincipal[posicao][i] == 0){
-                vetorPrincipal[posicao][i-1] = 0;
-                printf("Value deleted in %d\n", posicao);
-                return SUCESSO;
-                break;
+        int aux = TAM;
+        int index = -1;
+        int i;
+        for (i = index; i <= aux; i++){
+          vetorPrincipal[posicao-1][i] = vetorPrincipal[posicao-1][i+1];
+          aux--;
+          printf("Value deleted in %d\n", posicao);
+          break;
             }
-        }
-
+  
         // se a estrutura estiver vazia
-        if (vetorPrincipal[posicao][0] == 0){
+        if (vetorPrincipal[posicao-1][i] == 0){
             printf("empty structure\n");
             return ESTRUTURA_AUXILIAR_VAZIA;
         }
-
+  
         int retorno = SUCESSO;
         return retorno;
 }
@@ -315,7 +311,9 @@ Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
 */
 
 void inicializar()
-{
+{  
+  for (int i = 0; i < TAM; i++)
+      vetorPrincipal[i] = NULL;
 }
 
 /*
@@ -325,4 +323,5 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 
 void finalizar()
 {
+  free(vetorPrincipal[TAM]);
 }
