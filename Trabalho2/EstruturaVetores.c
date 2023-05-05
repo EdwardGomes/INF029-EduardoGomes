@@ -87,14 +87,14 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
             return retorno;
         }
         // testar se a estrutura auxiliar tem espaço
-        for (int i = 0; i < TAM; i++){
+        for (int i = 0; i <= TAM; i++){
             if (vetorPrincipal[posicao][i] == 0){
                 temEspaco = i;
                 break;
             }
         }
         //insere
-        if (temEspaco < TAM){
+        if (temEspaco <= 2){
             vetorPrincipal[posicao][temEspaco] = valor;// inserir o valor na posição
             printf("Value inserted successfully in %d, %d\n", posicao, valor);
             retorno = SUCESSO;
@@ -136,7 +136,7 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
         }
 
         // se a estrutura nao estiver vazia
-        for (int i = 0; i < TAM; i++){
+        for (int i = 0; i <= TAM; i++){
             if (vetorPrincipal[posicao][i] == 0){
                 vetorPrincipal[posicao][i-1] = 0;
                 printf("Value deleted in %d\n", posicao);
