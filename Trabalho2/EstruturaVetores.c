@@ -22,7 +22,7 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     int retorno = 0;
     
     // se posição é um valor válido {entre 1 e 10}
-    if (posicao < 1 || posicao > TAM){
+    if (posicao < 1 || posicao > 10){
       //  printf("invalid position for structure\n");
         return POSICAO_INVALIDA;
       
@@ -66,20 +66,15 @@ CONSTANTES
 */
 int inserirNumeroEmEstrutura(int posicao, int valor)
 {
-    int retorno = 0;
-    int existeEstruturaAuxiliar = 0;
     int temEspaco = 0;
-    int posicao_invalida = 0;
 
     if (posicao < 1 || posicao > 10){
-        retorno = POSICAO_INVALIDA;
-        return retorno;
+        return POSICAO_INVALIDA;
     }
         // testar se existe a estrutura auxiliar
         if (vetorPrincipal[posicao-1] == NULL)
         {
-            retorno = SEM_ESTRUTURA_AUXILIAR;
-            return retorno;
+            return SEM_ESTRUTURA_AUXILIAR;
         }
         
         // testar se a estrutura auxiliar tem espaço
@@ -93,17 +88,13 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         if (temEspaco <= posicao){
             vetorPrincipal[posicao-1][temEspaco] = valor;// inserir o valor na posição
             printf("Value inserted successfully in %d, %d\n", posicao, valor);
-            retorno = SUCESSO;
-            return retorno;
+            return SUCESSO;
         }
         else
         {  
             printf("No space\n");
-            retorno = SEM_ESPACO;
-            return retorno;
+            return SEM_ESPACO;
        }
-      
-    return retorno;
 }
 
 /*
@@ -323,5 +314,6 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 
 void finalizar()
 {
-  free(vetorPrincipal[TAM]);
+  for (int i = 0; i < TAM; i++)
+    free(vetorPrincipal[i]);
 }
