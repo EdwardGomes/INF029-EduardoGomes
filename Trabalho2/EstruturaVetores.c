@@ -110,32 +110,30 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
-    int tamanho = sizeof(vetorPrincipal[posicao-1]);
-    
-    if (posicao < 1 || posicao > 10){
-        printf("invalid position for structure %d\n", posicao);
+    if (posicao < 1 || posicao > 10)
+    {
         return POSICAO_INVALIDA;
     }
  
         // testa se existe a estrutura auxiliar
     if (vetorPrincipal[posicao-1] == NULL)
         {
-            printf("No auxiliary structure in %d\n", posicao);
             return SEM_ESTRUTURA_AUXILIAR;
         }
-  
-        // se a estrutura nao estiver vazia
-    if (tamanho > 0){
-      tamanho--;
-      printf("Value %d deleted!\n", posicao);
-      return SUCESSO;
+    // testa se a estrutura auxiliar está vazia
+    int valorEncontrado = 0;
+    for (int i = 0; i <= 3; i++){
+        if (vetorPrincipal[posicao-1][i] != 0){
+            valorEncontrado = i;
+        }
     }
-      
-        // se a estrutura estiver vazia 
-    else {
-      return ESTRUTURA_AUXILIAR_VAZIA;
+    // se a estrutura estiver vazia
+    if (valorEncontrado == 0){
+        return ESTRUTURA_AUXILIAR_VAZIA;
     }
-    
+    // se a estrutura não estiver vazia
+    vetorPrincipal[posicao-1][valorEncontrado] = 0;
+    return SUCESSO;
 }
 
 /*
