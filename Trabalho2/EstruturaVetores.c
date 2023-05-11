@@ -71,6 +71,7 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     if (posicao < 1 || posicao > 10){
         return POSICAO_INVALIDA;
     }
+  
         // testar se existe a estrutura auxiliar
         if (vetorPrincipal[posicao-1] == NULL)
         {
@@ -87,12 +88,12 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         //insere
         if (temEspaco <= posicao){
             vetorPrincipal[posicao-1][temEspaco] = valor;// inserir o valor na posição
-            printf("Value inserted successfully in %d, %d\n", posicao, valor);
+            //printf("Value inserted successfully in %d, %d\n", posicao, valor);
             return SUCESSO;
         }
         else
         {  
-            printf("No space\n");
+            //printf("No space\n");
             return SEM_ESPACO;
        }
 }
@@ -109,37 +110,32 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
+    int tamanho = sizeof(vetorPrincipal[posicao-1]);
+    
     if (posicao < 1 || posicao > 10){
-        printf("invalid position for structure\n");
+        printf("invalid position for structure %d\n", posicao);
         return POSICAO_INVALIDA;
     }
-    
+ 
         // testa se existe a estrutura auxiliar
     if (vetorPrincipal[posicao-1] == NULL)
         {
-            printf("No auxiliary structure\n");
+            printf("No auxiliary structure in %d\n", posicao);
             return SEM_ESTRUTURA_AUXILIAR;
         }
-
+  
         // se a estrutura nao estiver vazia
-        int aux = TAM;
-        int index = -1;
-        int i;
-        for (i = index; i <= aux; i++){
-          vetorPrincipal[posicao-1][i] = vetorPrincipal[posicao-1][i+1];
-          aux--;
-          printf("Value deleted in %d\n", posicao);
-          break;
-            }
-  
-        // se a estrutura estiver vazia
-        if (vetorPrincipal[posicao-1][i] == 0){
-            printf("empty structure\n");
-            return ESTRUTURA_AUXILIAR_VAZIA;
-        }
-  
-        int retorno = SUCESSO;
-        return retorno;
+    if (tamanho > 0){
+      tamanho--;
+      printf("Value %d deleted!\n", posicao);
+      return SUCESSO;
+    }
+      
+        // se a estrutura estiver vazia 
+    else {
+      return ESTRUTURA_AUXILIAR_VAZIA;
+    }
+    
 }
 
 /*
@@ -314,6 +310,7 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 
 void finalizar()
 {
-  for (int i = 0; i < TAM; i++)
-    free(vetorPrincipal[i]);
+  for (int i = 0; i < TAM; i++){
+   free (vetorPrincipal[i]);
+  }
 }
