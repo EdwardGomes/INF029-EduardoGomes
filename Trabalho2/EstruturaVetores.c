@@ -6,6 +6,9 @@
 #include "EstruturaVetores.h"
 
 int *vetorPrincipal[TAM];
+int qtd[TAM];
+int tamVetor[TAM];
+int vetorFull[TAM];
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -42,6 +45,7 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     }
 
    vetorPrincipal[posicao-1] = (int *)malloc(tamanho * sizeof(int));
+   tamVetor[TAM] = tamanho;
   
     // o tamanho ser muito grande
     if (!vetorPrincipal[posicao-1]){
@@ -88,6 +92,7 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
         //insere
         if (temEspaco <= posicao){
             vetorPrincipal[posicao-1][temEspaco] = valor;// inserir o valor na posição
+            qtd[posicao-1]++;
             //printf("Value inserted successfully in %d, %d\n", posicao, valor);
             return SUCESSO;
         }
@@ -110,6 +115,7 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
+  
     if (posicao < 1 || posicao > 10)
     {
         return POSICAO_INVALIDA;
@@ -120,19 +126,14 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
         {
             return SEM_ESTRUTURA_AUXILIAR;
         }
-    // testa se a estrutura auxiliar está vazia
-    int valorEncontrado = 0;
-    for (int i = 0; i <= 3; i++){
-        if (vetorPrincipal[posicao-1][i] != 0){
-            valorEncontrado = i;
-        }
-    }
+
     // se a estrutura estiver vazia
-    if (valorEncontrado == 0){
+    if (qtd[posicao-1] == 0){
         return ESTRUTURA_AUXILIAR_VAZIA;
     }
     // se a estrutura não estiver vazia
-    vetorPrincipal[posicao-1][valorEncontrado] = 0;
+  
+    qtd[posicao-1]--;
     return SUCESSO;
 }
 
@@ -150,6 +151,25 @@ Rertono (int)
 */
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
 {
+    int achou = 0, i;
+
+    if (posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
+
+    if (vetorPrincipal[posicao-1] == NULL)
+        {
+          return SEM_ESTRUTURA_AUXILIAR;
+        }
+
+    for (i = 0; i < vetorFull[posicao-1]; i++){
+      if (vetorPrincipal[posicao-1][i] == valor){
+        achou++;
+      }
+      
+    }
+
+  
     int retorno = SUCESSO;
     return retorno;
 }
@@ -297,8 +317,10 @@ Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
 
 void inicializar()
 {  
-  for (int i = 0; i < TAM; i++)
+  for (int i = 0; i < TAM; i++){
       vetorPrincipal[i] = NULL;
+      qtd[i] = 0;
+  }
 }
 
 /*
