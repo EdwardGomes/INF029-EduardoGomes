@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}INF029-EduardoGomes/Trabalho1/",
+            "program": "${workspaceFolder}INF029-EduardoGomes/Trabalho2/",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${INF029-EduardoGomes}",
