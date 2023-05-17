@@ -151,7 +151,7 @@ Rertono (int)
 */
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
 {
-    int achou = 0, i;
+    int i, j;
     int contPosicao = 0;
 
     if (posicao < 1 || posicao > 10){
@@ -166,22 +166,22 @@ int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
         return ESTRUTURA_AUXILIAR_VAZIA;
     }    
 
-    for (i = 0; i < vetorFull[posicao-1]; i++){
-      if (vetorPrincipal[posicao-1][i] == valor){
-        achou++;
-      }
-      while (contPosicao < vetorFull[posicao-1]){
-        vetorPrincipal[posicao-1][i] = vetorPrincipal[posicao-1][i+1];
-        contPosicao++;
-      }
-    vetorFull[posicao-1]--;
+    for (i = 0; i < TAM; i++){
+        if (vetorPrincipal[posicao-1][i] == valor){
+            for (j = i; j < TAM - 1; j++) {
+                vetorPrincipal[posicao-1][j] = vetorPrincipal[posicao-1][j+1];
+            }
+            contPosicao++;
+            vetorFull[posicao-1]--;
+            break;
+        } 
     }
-    
-    if (achou > 0){
-      return SUCESSO;
+    if (contPosicao > 0){
+        return SUCESSO;
     }
-    else{
-      return NUMERO_INEXISTENTE;
+    else
+    {
+        return NUMERO_INEXISTENTE;
     }
 }
 
@@ -331,6 +331,8 @@ void inicializar()
   for (int i = 0; i < TAM; i++){
       vetorPrincipal[i] = NULL;
       qtd[i] = 0;
+      vetorFull[i] = 0;
+
   }
 }
 
