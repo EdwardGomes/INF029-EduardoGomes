@@ -162,6 +162,9 @@ int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
         {
           return SEM_ESTRUTURA_AUXILIAR;
         }
+    if (qtd[posicao-1] == 0){
+        return ESTRUTURA_AUXILIAR_VAZIA;
+    }    
 
     for (i = 0; i < vetorFull[posicao-1]; i++){
       if (vetorPrincipal[posicao-1][i] == valor){
@@ -173,14 +176,12 @@ int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
       }
     vetorFull[posicao-1]--;
     }
-    if (achou == 0){
-      return NUMERO_INEXISTENTE;
-    }
-    else{
+    
+    if (achou > 0){
       return SUCESSO;
     }
-    if (vetorFull[posicao-1] == 0){
-      return ESTRUTURA_AUXILIAR_VAZIA;
+    else{
+      return NUMERO_INEXISTENTE;
     }
 }
 
