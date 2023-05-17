@@ -172,7 +172,7 @@ int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
                 vetorPrincipal[posicao-1][j] = vetorPrincipal[posicao-1][j+1];
             }
             contPosicao++;
-            vetorFull[posicao-1]--;
+            
             break;
         } 
     }
