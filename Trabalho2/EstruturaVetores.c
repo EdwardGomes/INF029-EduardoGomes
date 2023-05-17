@@ -8,7 +8,6 @@
 int *vetorPrincipal[TAM];
 int qtd[TAM];
 int tamVetor[TAM];
-int vetorFull[TAM];
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -330,8 +329,6 @@ void inicializar()
   for (int i = 0; i < TAM; i++){
       vetorPrincipal[i] = NULL;
       qtd[i] = 0;
-      vetorFull[i] = 0;
-
   }
 }
 
