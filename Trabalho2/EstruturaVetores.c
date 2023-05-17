@@ -208,7 +208,6 @@ Retorno (int)
 */
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
-    int retorno = 0;
 
     if (posicao < 1 || posicao > 10)
     {
@@ -223,8 +222,6 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
         vetorAux[i] = vetorPrincipal[posicao-1][i];
         return SUCESSO;
     }
-
-    return retorno;
 }
 
 /*
