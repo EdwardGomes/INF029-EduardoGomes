@@ -171,6 +171,7 @@ int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
                 vetorPrincipal[posicao-1][j] = vetorPrincipal[posicao-1][j+1];
             }
             contPosicao++;
+            qtd[posicao-1]--;
             break;
         } 
     }
@@ -207,9 +208,19 @@ Retorno (int)
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
 
-    int retorno = 0;
+    if (posicao < 1 || posicao > 10)
+    {
+        return POSICAO_INVALIDA;
+    }
 
-    return retorno;
+    if (vetorPrincipal[posicao-1] == NULL)
+        {
+          return SEM_ESTRUTURA_AUXILIAR;
+        }
+    for (int i = 0; i < TAM; i++){
+        vetorAux[i] = vetorPrincipal[posicao-1][i];
+        return SUCESSO;
+    }
 }
 
 /*
