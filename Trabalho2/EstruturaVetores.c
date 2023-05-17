@@ -218,6 +218,11 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
         {
           return SEM_ESTRUTURA_AUXILIAR;
         }
+
+    if (qtd[posicao-1] == 0){
+        return ESTRUTURA_AUXILIAR_VAZIA;
+    }
+
     for (int i = 0; i < TAM; i++){
         vetorAux[i] = vetorPrincipal[posicao-1][i];
         return SUCESSO;
