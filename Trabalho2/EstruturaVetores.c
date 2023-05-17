@@ -165,17 +165,23 @@ int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
     if (qtd[posicao-1] == 0){
         return ESTRUTURA_AUXILIAR_VAZIA;
     }    
-
+    // Percorre a estrutura auxiliar na posição indicada
     for (i = 0; i < TAM; i++){
+        // Se encontrar o valor desejado
         if (vetorPrincipal[posicao-1][i] == valor){
+            // Move os elementos seguintes um índice para trás
             for (j = i; j < TAM - 1; j++) {
                 vetorPrincipal[posicao-1][j] = vetorPrincipal[posicao-1][j+1];
             }
+            // Incrementa o contador de posições removidas
             contPosicao++;
+            // Decrementa o contador de posições ocupadas
             qtd[posicao-1]--;
+            // Sai do loop
             break;
         } 
     }
+    // Verifica se algum elemento foi removido
     if (contPosicao > 0){
         return SUCESSO;
     }
