@@ -231,7 +231,7 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
     }
 
     for (i = 0; i < TAM; i++){
-        vetorAux[i] = *vetorPrincipal[posicao-1];
+        vetorAux[i] = *(vetorPrincipal[posicao-1]+i);
     }
 
     return SUCESSO;
