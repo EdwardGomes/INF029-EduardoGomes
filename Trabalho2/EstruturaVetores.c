@@ -8,6 +8,7 @@
 int *vetorPrincipal[TAM];
 int qtd[TAM];
 int tamVetor[TAM];
+int vetorFull[TAM];
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -230,10 +231,10 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
         return ESTRUTURA_AUXILIAR_VAZIA;
     }
 
-    for (i = 0; i < TAM; i++){
+    for (i = 0; i < qtd[posicao-1]; i++){
         vetorAux[i] = *(vetorPrincipal[posicao-1]+i);
     }
-
+  
     return SUCESSO;
 }
 
@@ -249,7 +250,21 @@ int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
 
     int retorno = 0;
+    int i;
 
+    if (posicao < 1 || posicao > 10)
+    {
+        return POSICAO_INVALIDA;
+    }
+
+    if (vetorPrincipal[posicao-1] == NULL)
+        {
+          return SEM_ESTRUTURA_AUXILIAR;
+        }
+
+    for (i = 0; i < qtd[posicao-1]; i++){
+        vetorAux[i] = *(vetorPrincipal[posicao-1]+i);
+    }
     
     return retorno;
 }
@@ -354,6 +369,7 @@ void inicializar()
   for (int i = 0; i < TAM; i++){
       vetorPrincipal[i] = NULL;
       qtd[i] = 0;
+      vetorFull[i] = 0;
   }
 }
 
