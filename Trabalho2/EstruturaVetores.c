@@ -248,8 +248,6 @@ Rertono (int)
 */
 int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
-
-    int retorno = 0;
     int i;
 
     if (posicao < 1 || posicao > 10)
@@ -265,8 +263,19 @@ int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
     for (i = 0; i < qtd[posicao-1]; i++){
         vetorAux[i] = *(vetorPrincipal[posicao-1]+i);
     }
-    
-    return retorno;
+
+    for (int i = 0; i < qtd[posicao-1]; i++){
+        for (int j = i+1; j < qtd[posicao-1]; j++){
+            if (vetorAux[i] > vetorAux[j]){
+                int aux = vetorAux[i];
+                vetorAux[i] = vetorAux[j];
+                vetorAux[j] = aux;
+
+            }
+        }
+    }
+    return SUCESSO;
+        
 }
 
 /*
@@ -278,9 +287,35 @@ Rertono (int)
 */
 int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
-
     int retorno = 0;
-    return retorno;
+    int j = 0;
+    int contador = 0;
+    int quantidade = 0;
+
+    for (int i = 0; int < TAM; i++){
+        if (qtd[i] != NULL){
+            quantidade = quantidade + qtd[i];
+        }
+    }
+
+    for (int i = 0; i < TAM; i++){
+        if (qtd[i] == 0 && vetorPrincipal[i] == NULL){
+            contador++;
+        }
+        else {
+            for (int k = 0; k < qtd[i]; k++){
+                vetorAux[j] = *(vetorPrincipal[i]+k);
+                j++;
+            }
+        }
+    }
+
+    if (contador == TAM){
+        return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+    }
+    else {
+        return SUCESSO;
+    }
 }
 
 /*
