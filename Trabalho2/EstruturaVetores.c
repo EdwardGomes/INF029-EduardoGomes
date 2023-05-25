@@ -230,7 +230,7 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
     if (qtd[posicao-1] == 0){
         return ESTRUTURA_AUXILIAR_VAZIA;
     }
-
+     // Copia os elementos da estrutura auxiliar na posição especificada para o vetorAux
     for (i = 0; i < qtd[posicao-1]; i++){
         vetorAux[i] = *(vetorPrincipal[posicao-1]+i);
     }
@@ -259,11 +259,11 @@ int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
         {
           return SEM_ESTRUTURA_AUXILIAR;
         }
-
+    // Copia os elementos da estrutura auxiliar na posição especificada para o vetorAux
     for (i = 0; i < qtd[posicao-1]; i++){
         vetorAux[i] = *(vetorPrincipal[posicao-1]+i);
     }
-
+    // Ordena os elementos do vetorAux em ordem crescente (bubble sort)
     for (int i = 0; i < qtd[posicao-1]; i++){
         for (int j = i+1; j < qtd[posicao-1]; j++){
             if (vetorAux[i] > vetorAux[j]){
@@ -274,8 +274,7 @@ int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
             }
         }
     }
-    return SUCESSO;
-        
+    return SUCESSO;     
 }
 
 /*
@@ -291,25 +290,28 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
     int j = 0;
     int contador = 0;
     int quantidade = 0;
-
+    // Percorre o vetorPrincipal 
     for (int i = 0; int < TAM; i++){
+        // Se a estrutura auxiliar na posição i não for nula
         if (qtd[i] != NULL){
-            quantidade = quantidade + qtd[i];
+            quantidade = quantidade + qtd[i]; // Soma a quantidade de elementos da estrutura auxiliar na posição i
         }
     }
-
+     // Percorre todas as estruturas auxiliares novamente
     for (int i = 0; i < TAM; i++){
+        // verifica se a estrutura auxiliar está vazia e se é nula
         if (qtd[i] == 0 && vetorPrincipal[i] == NULL){
             contador++;
         }
         else {
+            // Copia os elementos da estrutura auxiliar na posição i para o vetorAux
             for (int k = 0; k < qtd[i]; k++){
                 vetorAux[j] = *(vetorPrincipal[i]+k);
-                j++;
+                j++;// Incrementa o contador de posições do vetorAux
             }
         }
     }
-
+    // verifica se todas as estruturas auxiliares estão vazias
     if (contador == TAM){
         return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
     }
@@ -327,9 +329,45 @@ Rertono (int)
 */
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
-
+    int contador = 0, contador1 = 0, j = 0;
+    int quantidade;
     int retorno = 0;
-    return retorno;
+    // percore as estruturas auxiliares
+    for (int i = 0; i < TAM; i++){
+        if (qtd[i] != NULL){// verifica se a estrutura auxiliar na posição i não é nula
+            quantidade = quantidade + qtd[i];// Soma a quantidade de elementos da estrutura auxiliar na posição i
+        }
+    }
+    // percore as estruturas auxiliares novamente
+    for (int i = 0; i < TAM; i++){
+        if (qtd[i] == 0 && vetorPrincipal[i] == NULL){// verifica se a estrutura auxiliar está vazia e se é nula
+            contador++;// Incrementa o contador de estruturas auxiliares vazias
+        }
+        else {
+            // Copia os elementos da estrutura auxiliar na posição i para o vetorAux
+            for (int k = 0; k < qtd[i]; k++){
+                vetorAux[j] = *(vetorPrincipal[i]+k);
+                j++;
+            }
+        }
+    }
+    // verifica se todas as estruturas auxiliares estão vazias
+    if (contador == TAM){
+        return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+    }
+    else {
+        // Ordena os elementos do vetorAux em ordem crescente (bubble sort)
+        for (int i = 0; i < quantidade; i++){
+            for (int j = i+1; j < quantidade; j++){
+                if (vetorAux[i] > vetorAux[j]){
+                    int aux = vetorAux[i];
+                    vetorAux[i] = vetorAux[j];
+                    vetorAux[j] = aux;
+                }
+            }
+        }
+    }
+    return SUCESSO;
 }
 
 /*
@@ -344,8 +382,34 @@ Rertono (int)
 */
 int modificarTamanhoEstruturaAuxiliar(int posicao, int novoTamanho)
 {
-
+    int i, tamanhoFinal;
     int retorno = 0;
+
+    tamanhoFinal = tamVetor[posicao-1] + novoTamanho;
+
+    if (posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
+
+    else if (tamanhoFinal > TAM){
+        return SEM_ESPACO_DE_MEMORIA;
+    }
+
+    else if (vetorPrincipal[posicao-1] == NULL){
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+
+    else if (novoTamanho < 0){
+        return NOVO_TAMANHO_INVALIDO;
+    }
+
+    else {
+        // Aloca o novo tamanho para a estrutura auxiliar na posição posicao-1
+        vetorPrincipal[posicao-1] = (int*) realloc(vetorPrincipal[posicao-1], tamanhoFinal*sizeof(int));
+        tamVetor[posicao-1] = tamanhoFinal;
+        return SUCESSO;
+    }
+
     return retorno;
 }
 
@@ -359,10 +423,28 @@ Retorno (int)
 */
 int getQuantidadeElementosEstruturaAuxiliar(int posicao)
 {
-
     int retorno = 0;
 
-    return retorno;
+    if (posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
+
+    else if (qtd[posicao-1] == NULL){
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+
+    else if (qtd[posicao-1] == 0){
+        return ESTRUTURA_AUXILIAR_VAZIA;
+    }
+
+    else {
+        return qtd[posicao-1];
+    }
+
+    else if (vetorPrincipal[posicao-1] == NULL){
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+
 }
 
 /*
