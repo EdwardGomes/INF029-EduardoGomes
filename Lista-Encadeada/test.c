@@ -33,6 +33,18 @@ void insert(struct No** cabeca, int valor){
       printf("\n");
   }
 
+  void destroiLista(struct No** cabeca){
+    struct No* atual = *cabeca;
+    struct No* prox = NULL;
+
+    while (atual != NULL) {
+      prox = atual->prox;
+      free(atual);
+      atual = prox;
+    }
+    *cabeca = NULL;
+  }
+
   int main(){
     struct No* cabeca = NULL;
 
