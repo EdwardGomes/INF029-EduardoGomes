@@ -291,7 +291,7 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
     int contador = 0;
     int quantidade = 0;
     // Percorre o vetorPrincipal 
-    for (int i = 0; int < TAM; i++){
+    for (int i = 0; i < TAM; i++){
         // Se a estrutura auxiliar na posição i não for nula
         if (qtd[i] != NULL){
             quantidade = quantidade + qtd[i]; // Soma a quantidade de elementos da estrutura auxiliar na posição i
@@ -429,20 +429,20 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao)
         return POSICAO_INVALIDA;
     }
 
-    else if (qtd[posicao-1] == NULL){
+    if (qtd[posicao-1] == NULL){
         return SEM_ESTRUTURA_AUXILIAR;
     }
 
-    else if (qtd[posicao-1] == 0){
-        return ESTRUTURA_AUXILIAR_VAZIA;
+    if (vetorPrincipal[posicao-1] == NULL){
+        return SEM_ESTRUTURA_AUXILIAR;
     }
 
     else {
         return qtd[posicao-1];
     }
 
-    else if (vetorPrincipal[posicao-1] == NULL){
-        return SEM_ESTRUTURA_AUXILIAR;
+    if (qtd[posicao-1] == 0){
+        return ESTRUTURA_AUXILIAR_VAZIA;
     }
 
 }
